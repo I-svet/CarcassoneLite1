@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Playerp {
-    public City city;
+    public ArrayList<City> cities;
     public String name;
+    public int scor=0;
     ArrayList<SuperMiple> hand;
     public Playerp(String nameIds, String namecolor ){
         this.name=nameIds;
@@ -38,6 +39,12 @@ public class Playerp {
     }
     public ArrayList<SuperMiple> getHand(){
         return this.hand;
+    }
+    public void newcity(){
+    // TODO add function
+    }
+    public void connect_cities(){
+        // TODO add function
     }
 
 

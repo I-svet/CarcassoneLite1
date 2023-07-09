@@ -41,7 +41,8 @@ public class CLField {
     public boolean isPointOkey(int x, int y, CLCard card, CLFieldPoint.Orientation ont) {
         boolean t = true;
         if(points[x][y]!=null) t=false;
-        if (points[x - 1][y] != null) {
+        if(points[x-1][y]==null && points[x+1][y]==null && points[x][y-1]==null && points[x][y+1]==null) t = false;
+            if (points[x - 1][y] != null) {
             switch(points[x - 1][y].ont) {
                 case B -> {
                     switch (ont) {

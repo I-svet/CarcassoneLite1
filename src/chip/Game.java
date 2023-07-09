@@ -43,7 +43,6 @@ public class Game {
 
         playerIds = pids;
         currentPlayer = 0;
-       // playerHand = new ArrayList<ArrayList<SuperMiple>>();
         ArrayList<String> colors = new ArrayList<>();
         colors.add("red");
         colors.add("green");
@@ -52,11 +51,7 @@ public class Game {
         players = new Playerp[pids.length];
 
        for (int i = 0; i < pids.length; i++) {
-
-
-
                 String namecolor = colors.get(i);
-
                 players[i] = new Playerp(pids[i],namecolor);
               /* SuperMiple[] miple = new SuperMiple[8];
                 for(int k=0;k<8;k++){
