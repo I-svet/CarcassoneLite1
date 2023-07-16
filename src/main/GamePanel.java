@@ -17,14 +17,13 @@ import java.util.HashMap;
 
 public class GamePanel extends JPanel implements Runnable{
     JLabel jLabel1;
-    int cardField=2;
     public final int originalTileSize = 216;
     final int originalMipleSize = 16;
     final int scale=1;
     final int scaleM =3;
     public final int tileSize =originalTileSize*scale;//216
     public final int mipleSize =originalMipleSize*scaleM;//48
-  public  final int maxScreenCol=4;
+    public  final int maxScreenCol=4;
     public  final int maxScreenRow=3;
     public  final int screenWidth=tileSize*maxScreenCol;//856
     public final int screenHeight = tileSize*maxScreenRow;//648
@@ -33,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldRow =72;
     public final int maxWorldWidth =tileSize*maxWorldCol;
     public final int maxWorldHeight =tileSize*maxWorldRow;
-    int FPS =60;
+     final int FPS = 60;
 /*
     private AddPlayerNames addPlayers = new AddPlayerNames();
     ArrayList<String> temp =new ArrayList<>();
@@ -62,8 +61,10 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     TileManager tileM = new TileManager(this);
-    public Player player = new Player(this,keyH,mH);
     CLField clField = new CLField(this);
+
+    public Player player = new Player(this,keyH,mH);
+
     public CLDeck clDeck = new CLDeck();
     public CLCard upCard=new CLCard();
     public Game game;
