@@ -259,10 +259,15 @@ public class GamePanel extends JPanel implements Runnable{
             if (clField.iiMipleOkey(xOnMapCard,  yOnMapCard,xOnMapPoint, yOnMapPoint, this)) {
 
                 clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
+
+
                 game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
                 setPidName(game.changePlayer());
                 upCard = clDeck.drawCard();
                 mH.p=false;
+
+
+
             }
 
             mH.check2 = true;

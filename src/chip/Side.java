@@ -19,7 +19,7 @@ public class Side {
 
     public ArrayList<Side> connections;
     public SuperMiple miple = null;
-    public boolean connected = false;
+    public boolean open = true;
 
     public Side(final TypeEdge typeEdge,final ArrayList<Side> connections){
         this.typeEdge = typeEdge;
