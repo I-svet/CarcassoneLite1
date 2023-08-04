@@ -4,17 +4,15 @@ package chip;
 import chipMiple.SuperMiple;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static chip.CLFieldPoint.Orientation.A;
 
 public class CLField {
-    private CLFieldPoint[][] points;
+    private final CLFieldPoint[][] points;
     BufferedImage image;
     String name;
     CLDeck clDeck;
@@ -23,7 +21,7 @@ public class CLField {
 
     public CLField(GamePanel gp) {
         points = new CLFieldPoint[72][72];
-        points[35][35]=new CLFieldPoint(new CLCard().RoadCity4(),A);
+        points[35][35]=new CLFieldPoint(new CLCard().RoadCity4(),0);
         this.gp=gp;
     }
 
@@ -35,11 +33,12 @@ public class CLField {
         }
 
         CLCard StartGame = new CLCard().city1();
-        points[36][36] = new CLFieldPoint(StartGame, CLFieldPoint.Orientation.B);
+        points[36][36] = new CLFieldPoint(StartGame, 2);
     }
 
-    public boolean isPointOkey(int x, int y, CLCard card, CLFieldPoint.Orientation ont) {
+   /*public boolean isPointOkey(int x, int y, CLCard card, int ontt) {
         // TODO change this shit ( add upper, lower, left and right cards to each clFieldPoint)
+        CLFieldPoint.Orientation ont = CLFieldPoint.Orientation.getOrientation(ontt);
         boolean t = true;
         if(points[x][y]!=null) t=false;
         if(points[x-1][y]==null && points[x+1][y]==null && points[x][y-1]==null && points[x][y+1]==null) t = false;
@@ -47,34 +46,34 @@ public class CLField {
             switch(points[x - 1][y].ont) {
                 case B -> {
                     switch (ont) {
-                        case A -> {if( points[x - 1][y].card.C.getTypeEdge() != card.D.getTypeEdge()) t=false;}
-                        case B -> {if( points[x - 1][y].card.C.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case C -> {if( points[x - 1][y].card.C.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case D -> {if( points[x - 1][y].card.C.getTypeEdge() != card.C.getTypeEdge()) t=false;}
+                        case A -> {if( points[x - 1][y].card.getC().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
+                        case B -> {if( points[x - 1][y].card.getC().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case C -> {if( points[x - 1][y].card.getC().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case D -> {if( points[x - 1][y].card.getC().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
                     }
                 }
                 case A -> {
                     switch (ont) {
-                        case A -> {if( points[x - 1][y].card.B.getTypeEdge() != card.D.getTypeEdge()) t=false;}
-                        case B -> {if( points[x - 1][y].card.B.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case C -> {if( points[x - 1][y].card.B.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case D -> {if( points[x - 1][y].card.B.getTypeEdge() != card.C.getTypeEdge()) t=false;}
+                        case A -> {if( points[x - 1][y].card.getB().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
+                        case B -> {if( points[x - 1][y].card.getB().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case C -> {if( points[x - 1][y].card.getB().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case D -> {if( points[x - 1][y].card.getB().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
                     }
                 }
                 case D -> {
                     switch (ont) {
-                        case A -> {if( points[x - 1][y].card.A.getTypeEdge() != card.D.getTypeEdge()) t=false;}
-                        case B -> {if( points[x - 1][y].card.A.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case C -> {if( points[x - 1][y].card.A.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case D -> {if( points[x - 1][y].card.A.getTypeEdge() != card.C.getTypeEdge()) t=false;}
+                        case A -> {if( points[x - 1][y].card.getA().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
+                        case B -> {if( points[x - 1][y].card.getA().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case C -> {if( points[x - 1][y].card.getA().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case D -> {if( points[x - 1][y].card.getA().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
                     }
                 }
                 case C -> {
                     switch (ont) {
-                        case A -> {if( points[x - 1][y].card.D.getTypeEdge() != card.D.getTypeEdge()) t=false;}
-                        case B -> {if( points[x - 1][y].card.D.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case C -> {if( points[x - 1][y].card.D.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case D -> {if( points[x - 1][y].card.D.getTypeEdge() != card.C.getTypeEdge()) t=false;}
+                        case A -> {if( points[x - 1][y].card.getD().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
+                        case B -> {if( points[x - 1][y].card.getD().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case C -> {if( points[x - 1][y].card.getD().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case D -> {if( points[x - 1][y].card.getD().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
                     }
                 }
             }
@@ -86,34 +85,34 @@ public class CLField {
             switch(points[x + 1][y].ont) {
                 case B -> {
                     switch (ont) {
-                        case A -> {if( points[x + 1][y].card.A.getTypeEdge() != card.B.getTypeEdge()) t =false;}
-                        case B -> {if( points[x + 1][y].card.A.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case C -> {if( points[x + 1][y].card.A.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case D -> {if( points[x + 1][y].card.A.getTypeEdge() != card.A.getTypeEdge()) t =false;}
+                        case A -> {if( points[x + 1][y].card.getA().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
+                        case B -> {if( points[x + 1][y].card.getA().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case C -> {if( points[x + 1][y].card.getA().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case D -> {if( points[x + 1][y].card.getA().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
                     }
                 }
                 case A -> {
                     switch (ont) {
-                        case A -> {if( points[x + 1][y].card.D.getTypeEdge() != card.B.getTypeEdge()) t =false;}
-                        case B -> {if( points[x + 1][y].card.D.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case C -> {if( points[x + 1][y].card.D.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case D -> {if( points[x + 1][y].card.D.getTypeEdge() != card.A.getTypeEdge()) t =false;}
+                        case A -> {if( points[x + 1][y].card.getD().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
+                        case B -> {if( points[x + 1][y].card.getD().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case C -> {if( points[x + 1][y].card.getD().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case D -> {if( points[x + 1][y].card.getD().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
                     }
                 }
                 case D -> {
                     switch (ont) {
-                        case A -> {if( points[x + 1][y].card.C.getTypeEdge() != card.B.getTypeEdge()) t =false;}
-                        case B -> {if( points[x + 1][y].card.C.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case C -> {if( points[x + 1][y].card.C.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case D -> {if( points[x + 1][y].card.C.getTypeEdge() != card.A.getTypeEdge()) t =false;}
+                        case A -> {if( points[x + 1][y].card.getC().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
+                        case B -> {if( points[x + 1][y].card.getC().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case C -> {if( points[x + 1][y].card.getC().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case D -> {if( points[x + 1][y].card.getC().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
                     }
                 }
                 case C -> {
                     switch (ont) {
-                        case A -> {if( points[x + 1][y].card.B.getTypeEdge() != card.B.getTypeEdge()) t =false;}
-                        case B -> {if( points[x + 1][y].card.B.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case C -> {if( points[x + 1][y].card.B.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case D -> {if( points[x + 1][y].card.B.getTypeEdge() != card.A.getTypeEdge()) t =false;}
+                        case A -> {if( points[x + 1][y].card.getB().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
+                        case B -> {if( points[x + 1][y].card.getB().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case C -> {if( points[x + 1][y].card.getB().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case D -> {if( points[x + 1][y].card.getB().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
                     }
                 }
             }
@@ -125,34 +124,34 @@ public class CLField {
             switch (points[x ][y-1].ont) {
                 case B -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y-1].card.D.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case B -> {if( points[x ][y-1].card.D.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case C -> {if( points[x ][y-1].card.D.getTypeEdge() != card.C.getTypeEdge()) t=false;}
-                        case D -> {if( points[x ][y-1].card.D.getTypeEdge() != card.D.getTypeEdge()) t=false;}
+                        case A -> {if( points[x][y - 1].card.getD().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case B -> {if( points[x][y - 1].card.getD().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case C -> {if( points[x][y - 1].card.getD().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
+                        case D -> {if( points[x][y - 1].card.getD().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
                     }
                 }
                 case A -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y-1].card.C.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case B -> {if( points[x ][y-1].card.C.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case C -> {if( points[x ][y-1].card.C.getTypeEdge() != card.C.getTypeEdge()) t=false;}
-                        case D -> {if( points[x ][y-1].card.C.getTypeEdge() != card.D.getTypeEdge()) t=false;}
+                        case A -> {if( points[x][y - 1].card.getC().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case B -> {if( points[x][y - 1].card.getC().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case C -> {if( points[x][y - 1].card.getC().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
+                        case D -> {if( points[x][y - 1].card.getC().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
                     }
                 }
                 case D -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y-1].card.B.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case B -> {if( points[x ][y-1].card.B.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case C -> {if( points[x ][y-1].card.B.getTypeEdge() != card.C.getTypeEdge()) t=false;}
-                        case D -> {if( points[x ][y-1].card.B.getTypeEdge() != card.D.getTypeEdge()) t=false;}
+                        case A -> {if( points[x][y - 1].card.getB().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case B -> {if( points[x][y - 1].card.getB().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case C -> {if( points[x][y - 1].card.getB().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
+                        case D -> {if( points[x][y - 1].card.getB().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
                     }
                 }
                 case C -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y-1].card.A.getTypeEdge() != card.A.getTypeEdge()) t=false;}
-                        case B -> {if( points[x ][y-1].card.A.getTypeEdge() != card.B.getTypeEdge()) t=false;}
-                        case C -> {if( points[x ][y-1].card.A.getTypeEdge() != card.C.getTypeEdge()) t=false;}
-                        case D -> {if( points[x ][y-1].card.A.getTypeEdge() != card.D.getTypeEdge()) t=false;}
+                        case A -> {if( points[x][y - 1].card.getA().getTypeEdge() != card.getA().getTypeEdge()) t=false;}
+                        case B -> {if( points[x][y - 1].card.getA().getTypeEdge() != card.getB().getTypeEdge()) t=false;}
+                        case C -> {if( points[x][y - 1].card.getA().getTypeEdge() != card.getC().getTypeEdge()) t=false;}
+                        case D -> {if( points[x][y - 1].card.getA().getTypeEdge() != card.getD().getTypeEdge()) t=false;}
                     }
                 }
             }
@@ -161,137 +160,107 @@ public class CLField {
             switch (points[x ][y+1].ont) {
                 case B -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y+1].card.B.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case B -> {if( points[x ][y+1].card.B.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case C -> {if( points[x ][y+1].card.B.getTypeEdge() != card.A.getTypeEdge()) t =false;}
-                        case D -> {if( points[x ][y+1].card.B.getTypeEdge() != card.B.getTypeEdge()) t =false;}
+                        case A -> {if( points[x][y + 1].card.getB().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case B -> {if( points[x][y + 1].card.getB().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case C -> {if( points[x][y + 1].card.getB().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
+                        case D -> {if( points[x][y + 1].card.getB().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
                     }
                 }
                 case A -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y+1].card.A.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case B -> {if( points[x ][y+1].card.A.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case C -> {if( points[x ][y+1].card.A.getTypeEdge() != card.A.getTypeEdge()) t =false;}
-                        case D -> {if( points[x ][y+1].card.A.getTypeEdge() != card.B.getTypeEdge()) t =false;}
+                        case A -> {if( points[x][y + 1].card.getA().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case B -> {if( points[x][y + 1].card.getA().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case C -> {if( points[x][y + 1].card.getA().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
+                        case D -> {if( points[x][y + 1].card.getA().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
                     }
                 }
                 case D -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y+1].card.D.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case B -> {if( points[x ][y+1].card.D.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case C -> {if( points[x ][y+1].card.D.getTypeEdge() != card.A.getTypeEdge()) t =false;}
-                        case D -> {if( points[x ][y+1].card.D.getTypeEdge() != card.B.getTypeEdge()) t =false;}
+                        case A -> {if( points[x][y + 1].card.getD().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case B -> {if( points[x][y + 1].card.getD().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case C -> {if( points[x][y + 1].card.getD().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
+                        case D -> {if( points[x][y + 1].card.getD().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
                     }
                 }
                 case C -> {
                     switch (ont) {
-                        case A -> {if( points[x ][y+1].card.C.getTypeEdge() != card.C.getTypeEdge()) t =false;}
-                        case B -> {if( points[x ][y+1].card.C.getTypeEdge() != card.D.getTypeEdge()) t =false;}
-                        case C -> {if( points[x ][y+1].card.C.getTypeEdge() != card.A.getTypeEdge()) t =false;}
-                        case D -> {if( points[x ][y+1].card.C.getTypeEdge() != card.B.getTypeEdge()) t =false;}
+                        case A -> {if( points[x][y + 1].card.getC().getTypeEdge() != card.getC().getTypeEdge()) t =false;}
+                        case B -> {if( points[x][y + 1].card.getC().getTypeEdge() != card.getD().getTypeEdge()) t =false;}
+                        case C -> {if( points[x][y + 1].card.getC().getTypeEdge() != card.getA().getTypeEdge()) t =false;}
+                        case D -> {if( points[x][y + 1].card.getC().getTypeEdge() != card.getB().getTypeEdge()) t =false;}
                     }
                 }
             }
         }
         return t;
+    }*/
+
+    public boolean isPointOkey(int x, int y, CLCard card, int orientation) {
+        ArrayList<Side> sides = new ArrayList<>(List.of(card.getA(), card.getD(), card.getC(),card.getB() ));
+       Side upSide = sides.get(orientation);
+       Side rightSide = sides.get((orientation + 3) % 4);
+       Side downSide = sides.get((orientation + 2) % 4);
+       Side leftSide = sides.get((orientation + 1) % 4);
+        boolean t = true;
+        if(points[x][y]!=null) t=false;
+        if(points[x-1][y]==null && points[x+1][y]==null && points[x][y-1]==null && points[x][y+1]==null) t = false;
+
+       if (points[x - 1][y] != null) {
+
+           if (points[x - 1][y].getRightSide().getTypeEdge() != leftSide.getTypeEdge()) t = false;
+
+       }
+        if (points[x + 1][y] != null) {
+            if( points[x + 1][y].getLeftSide().getTypeEdge() != rightSide.getTypeEdge()) t=false;
+        }
+        if (points[x][y-1] != null) {
+            if( points[x][y-1].getDownSide().getTypeEdge() != upSide.getTypeEdge()) t=false;
+        }
+        if (points[x][y+1] != null) {
+            if( points[x][y+1].getUpSide().getTypeEdge() != downSide.getTypeEdge()) t=false;
+        }
+        return t;
     }
 
-    public Side.TypeEdge getLeftEdge(int x,int y){
-        CLCard card = points[x][y].getCard();
-        CLFieldPoint.Orientation ont =points[x][y].getOnt();
-        Side.TypeEdge t=null;
-        if(card!= null) {
-            switch (ont) {
-                case A -> t = card.D.getTypeEdge();
-                case B -> t = card.A.getTypeEdge();
-                case C -> t = card.B.getTypeEdge();
-                case D -> t = card.C.getTypeEdge();
-            }
-        }
-        return t;
-    }
-    public Side.TypeEdge getRightEdge(int x,int y){
-        CLCard card = points[x][y].getCard();
-        CLFieldPoint.Orientation ont =points[x][y].getOnt();
-        Side.TypeEdge t=null;
-        if(card!= null) {
-            switch (ont) {
-                case A -> t = card.B.getTypeEdge();
-                case B -> t = card.C.getTypeEdge();
-                case C -> t = card.D.getTypeEdge();
-                case D -> t = card.A.getTypeEdge();
-            }
-        }
-        return t;
-    }
-    public Side.TypeEdge getUpperEdge(int x,int y){
-        CLCard card = points[x][y].getCard();
-        CLFieldPoint.Orientation ont =points[x][y].getOnt();
-        Side.TypeEdge t=null;
-        if(card!= null) {
-            switch (ont) {
-                case A -> t = card.A.getTypeEdge();
-                case B -> t = card.B.getTypeEdge();
-                case C -> t = card.C.getTypeEdge();
-                case D -> t = card.D.getTypeEdge();
-            }
-        }
-        return t;
-    }
-    public Side.TypeEdge getLowerEdge(int x,int y){
-        CLCard card = points[x][y].getCard();
-        CLFieldPoint.Orientation ont =points[x][y].getOnt();
-        Side.TypeEdge t=null;
-        if(card!= null) {
-            switch (ont) {
-                case A -> t = card.C.getTypeEdge();
-                case B -> t = card.D.getTypeEdge();
-                case C -> t = card.A.getTypeEdge();
-                case D -> t = card.B.getTypeEdge();
-            }
-        }
-        return t;
-    }
+
+
+
     public CLCard getCard(int x,int y){
         return points[x][y].getCard();
     }
-    public void addCard(int x, int y, CLCard card, CLFieldPoint.Orientation ont){
-        points[x][y] = new CLFieldPoint(card, ont);
+    public void addCard(int x, int y, CLCard card, int orientation){
+        points[x][y] = new CLFieldPoint(card, orientation);
     }
-    public boolean iiMipleOkey(int x, int y,int x0,int y0,GamePanel gp){
+    public boolean isMipleOkey(int x, int y,int x0,int y0,GamePanel gp){
         int a= gp.tileSize;
         boolean t =false;
         int ont1 =0;
 
         boolean b = (y0 >= a / 3) && (y0 <= 2 * a / 3);
         if(points[x][y]!=null) {
-            switch (points[x][y].ont) {
-                case A -> ont1 = 0;
-                case D -> ont1 = 1;
-                case C -> ont1 = 2;
-                case B -> ont1 = 3;
-            }
+           ont1= points[x][y].getOrientation();
+
             if (x0 > a / 3) {
                 if (x0 <= 2 * a / 3) {
                     if (y0 < a / 3) {
-                        t = points[x][y].card.SideM[(4 - ont1) % 4].miple == null;
+                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].miple == null;
                     } else {
                         if (y0 > 2 * a / 3) {
-                            t = points[x][y].card.SideM[(6 - ont1) % 4].miple == null;
+                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].miple == null;
                         } else {
-                            if(points[x][y].card.center != null)
-                            t = points[x][y].card.center.miple == null;
+                            if(points[x][y].card.getCenter() != null)
+                            t = points[x][y].card.getCenter().miple == null;
                         }
                     }
                 } else {
                     if (b) {
-                        t = points[x][y].card.SideM[(5 - ont1) % 4].miple == null;
+                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].miple == null;
                     }
                 }
 
             } else {
                 if (b) {
-                    t = points[x][y].card.SideM[(7 - ont1) % 4].miple == null;
+                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].miple == null;
 
                 }
             }
@@ -303,25 +272,21 @@ public class CLField {
     public void addMiple(int x, int y, SuperMiple miple,int x0,int y0,GamePanel gp){
         int ont1=0;
         int a= gp.tileSize;
-        switch (points[x][y].ont) {
-            case A -> ont1 = 0;
-            case D -> ont1 = 1;
-            case C -> ont1 = 2;
-            case B -> ont1 = 3;
-        }
+        ont1 =points[x][y].getOrientation();
+
         boolean b = (y0 >= a / 3) && (y0 <= 2 * a / 3);
         if(x0>a/3){
            if(x0<=2*a/3) {
                if(y0<a/3){
-                   points[x][y].card.SideM[(4-ont1)%4].miple=miple;
+                   points[x][y].card.getSideM()[(4-ont1)%4].miple=miple;
                }
                else{
                    if(y0>2*a/3){
-                       points[x][y].card.SideM[(6-ont1)%4].miple=miple;
+                       points[x][y].card.getSideM()[(6-ont1)%4].miple=miple;
                    }
                    else{
-if(points[x][y].card.center!=null){
-    points[x][y].card.center.miple=miple;
+if(points[x][y].card.getCenter() !=null){
+    points[x][y].card.getCenter().miple=miple;
 }
                    }
                }
@@ -329,7 +294,7 @@ if(points[x][y].card.center!=null){
            else {
                if(b)
                {
-                   points[x][y].card.SideM[(5-ont1)%4].miple=miple;
+                   points[x][y].card.getSideM()[(5-ont1)%4].miple=miple;
                }
            }
 
@@ -337,7 +302,7 @@ if(points[x][y].card.center!=null){
         else{
             if(b)
             {
-                points[x][y].card.SideM[(7-ont1)%4].miple=miple;
+                points[x][y].card.getSideM()[(7-ont1)%4].miple=miple;
             }
         }
 
@@ -362,14 +327,9 @@ if(points[x][y].card.center!=null){
                     int screenY = (int) ((worldY - gp.player.worldY) * gp.player.scale + gp.player.screenY);
 
 
-                        int ont = 0;
-                        switch (points[worldCol][worldRow].ont) {
-                            case A -> ont = 0;
-                            case D -> ont = 1;
-                            case C -> ont = 2;
-                            case B -> ont = 3;
-                        }
-                        name = points[worldCol][worldRow].card.type + "";
+                        int ont =points[worldCol][worldRow].getOrientation();
+
+                        name = points[worldCol][worldRow].card.getType() + "";
                             image = gp.images.get(name+"_"+ont);
                         /*final double rads = Math.toRadians(90 * ont);
                         final double sin = Math.abs(Math.sin(rads));
@@ -385,7 +345,7 @@ if(points[x][y].card.center!=null){
                         rotateOp.filter(image, rotatedImage);*/
                        // g2.drawImage(rotatedImage, screenX, screenY, (int) ((int) gp.tileSize * gp.player.scale), (int) (gp.tileSize * gp.player.scale), null);
 
-                g2.drawImage(image, screenX, screenY, (int) ((int) gp.tileSize * gp.player.scale), (int) (gp.tileSize * gp.player.scale), null);
+                g2.drawImage(image, screenX, screenY, (int) (gp.tileSize * gp.player.scale), (int) (gp.tileSize * gp.player.scale), null);
 
                 if(points[worldCol][worldRow].card!=null){
                         points[worldCol][worldRow].drawMiple(screenX,screenY,g2,gp);

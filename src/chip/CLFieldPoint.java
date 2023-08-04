@@ -3,32 +3,35 @@ package chip;
 import main.GamePanel;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CLFieldPoint {
     public enum Orientation
     {
-        A,B,C,D;
-        private static final CLFieldPoint.Orientation[] ont = CLFieldPoint.Orientation.values();
+        A,D,C,B;
+        private static final ArrayList<CLFieldPoint.Orientation> onts = new ArrayList<>(List.of(Orientation.values()));
         public static CLFieldPoint.Orientation getOrientation(int i)
         {
-            return Orientation.ont[i];
+            return Orientation.onts.get(i);
+        }
+
+        int getOrientationIndex()
+        {
+            return onts.indexOf(this);
         }
     }
 
-    public CLCard card;
-    public Orientation ont;
+     CLCard card;
+     Side upSide;
+     Side downSide;
+     Side leftSide;
+     Side rightSide;
+     Orientation ont;
+    int orientation;
 
     public void drawMiple(int screenX,int screenY, Graphics2D g2,GamePanel gp){
-        int ont1=0;
-        switch (ont) {
-            case A -> ont1 = 0;
-            case D -> ont1 = 1;
-            case C -> ont1 = 2;
-            case B -> ont1 = 3;
-        }
+        int ont1=orientation;
 
         int x0= (int) (screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale);
         int x1= (int) (screenX+(gp.tileSize-gp.mipleSize)* gp.player.scale);
@@ -44,28 +47,51 @@ public class CLFieldPoint {
         a[2]=new Point(x2,y2);
         a[3]=new Point(x3,y3);
         for(int i=0;i<4;i++) {
-            if (card.SideM[i % 4].miple != null) {
-                g2.drawImage(card.SideM[i % 4].miple.image, a[(i + ont1) % 4].x, a[(i + ont1) % 4].y, (int) ((int) gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
+            if (card.getSideM()[i % 4].miple != null) {
+                g2.drawImage(card.getSideM()[i % 4].miple.image, a[(i + ont1) % 4].x, a[(i + ont1) % 4].y, (int) ((int) gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
             }
         }
-        if(card.center!=null){
-            if(card.center.miple!= null)
-            g2.drawImage(card.center.miple.image, (int) ( screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale), (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale), (int) ((int) gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
+        if(card.getCenter() !=null){
+            if(card.getCenter().miple!= null)
+            g2.drawImage(card.getCenter().miple.image, (int) ( screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale), (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale), (int) ((int) gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
 
         }
     }
 
 
-    public CLFieldPoint( CLCard card, Orientation ont){
+    public Side getUpSide() {
+        return upSide;
+    }
 
+    public Side getDownSide() {
+        return downSide;
+    }
+
+    public Side getLeftSide() {
+        return leftSide;
+    }
+
+    public Side getRightSide() {
+        return rightSide;
+    }
+
+    public CLFieldPoint(CLCard card, Integer orientation){
+        this.ont = Orientation.getOrientation(orientation);
         this.card=card;
-        this.ont=ont;
+        this.orientation = orientation;
+
+            ArrayList<Side> sides = new ArrayList<>(List.of(card.getA(), card.getD(), card.getC(),card.getB() ));
+            upSide = sides.get(orientation);
+            rightSide = sides.get((orientation + 3) % 4);
+            downSide = sides.get((orientation + 2) % 4);
+            leftSide = sides.get((orientation + 1) % 4);
+
     }
     public CLCard getCard(){
         return this.card;
     }
-    public Orientation getOnt(){
-        return this.ont;
+    public int getOrientation(){
+        return this.orientation;
     }
 
 }

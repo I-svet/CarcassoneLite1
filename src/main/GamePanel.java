@@ -222,13 +222,8 @@ public class GamePanel extends JPanel implements Runnable{
        player.update();
 
         if(!mH.check){
-            CLFieldPoint.Orientation orientation= CLFieldPoint.Orientation.A;
-            switch (keyH.ont) {
-            case 0-> orientation= CLFieldPoint.Orientation.A;
-            case 1-> orientation = CLFieldPoint.Orientation.D;
-            case 2 -> orientation= CLFieldPoint.Orientation.C;
-            case 3 -> orientation= CLFieldPoint.Orientation.B;
-            }
+            int orientation = keyH.ont;
+
             int xOnMap = ((int)(player.worldX+(mH.x- player.screenX)*1.0/player.scale))/this.tileSize;
             int yOnMap = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))/this.tileSize;
 
@@ -256,7 +251,7 @@ public class GamePanel extends JPanel implements Runnable{
             int xOnMapPoint = ((int)(player.worldX+(mH.x- player.screenX)*1.0/player.scale))%this.tileSize;
             int yOnMapPoint = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))%this.tileSize;
 
-            if (clField.iiMipleOkey(xOnMapCard,  yOnMapCard,xOnMapPoint, yOnMapPoint, this)) {
+            if (clField.isMipleOkey(xOnMapCard,  yOnMapCard,xOnMapPoint, yOnMapPoint, this)) {
 
                 clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
 

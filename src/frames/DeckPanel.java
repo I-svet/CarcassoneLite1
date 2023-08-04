@@ -2,19 +2,14 @@ package frames;
 
 import chip.CLCard;
 import chip.CLDeck;
-import chipCard.Chip_Card;
-import chipCard.SuperChip;
 import main.GamePanel;
 import main.KeyHandler;
-import main.MouseHandler;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -102,7 +97,7 @@ public class DeckPanel extends JPanel  implements Runnable,KeyListener{
         super.paintComponent(g);
         Graphics2D g2=(Graphics2D) g;
         this.upCard=upCard;
-        this.name = upCard.type + "";
+        this.name = upCard.getType() + "";
         try{
             image = ImageIO.read(getClass().getResourceAsStream("/resField/"+name+"_"+ont+".png"));
 

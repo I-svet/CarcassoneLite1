@@ -140,55 +140,55 @@ public class Game {
         ArrayList<CLCard> hand =  getPlayerHand(pid);
         return hand.get(choice);
     }*/
-    public boolean validCardPlay(CLCard card, CLFieldPoint.Orientation ont,  int x,int y){
-        return field.isPointOkey(x,y,card,ont);
-    }
+   /* public boolean validCardPlay(CLCard card, int orientation,  int x,int y){
+        return field.isPointOkey(x,y,card,orientation);
+    }*/
     public void checkPlayerTurn(String pid) throws InvalidPlayerTurnException {
         if (this.playerIds[this.currentPlayer]!= pid){
             throw new InvalidPlayerTurnException("it is not"+pid+ "'s turn",pid);
         }
     }
-    public Side.TypeEdge getLeftEdge(CLCard card, CLFieldPoint.Orientation ont){
+   /* public Side.TypeEdge getLeftEdge(CLCard card, CLFieldPoint.Orientation ont){
         Side.TypeEdge t=null;
         switch(ont){
-            case A -> t=card.D.getTypeEdge();
-            case B -> t=card.A.getTypeEdge();
-            case C -> t=card.B.getTypeEdge();
-            case D -> t=card.C.getTypeEdge();
+            case A -> t= card.getD().getTypeEdge();
+            case B -> t= card.getA().getTypeEdge();
+            case C -> t= card.getB().getTypeEdge();
+            case D -> t= card.getC().getTypeEdge();
         }
         return t;
     }
     public Side.TypeEdge getRightEdge(CLCard card, CLFieldPoint.Orientation ont){
         Side.TypeEdge t=null;
         switch(ont){
-            case A -> t=card.B.getTypeEdge();
-            case B -> t=card.C.getTypeEdge();
-            case C -> t=card.D.getTypeEdge();
-            case D -> t=card.A.getTypeEdge();
+            case A -> t= card.getB().getTypeEdge();
+            case B -> t= card.getC().getTypeEdge();
+            case C -> t= card.getD().getTypeEdge();
+            case D -> t= card.getA().getTypeEdge();
         }
         return t;
     }
     public Side.TypeEdge getUpperEdge(CLCard card, CLFieldPoint.Orientation ont){
         Side.TypeEdge t=null;
         switch(ont){
-            case A -> t=card.A.getTypeEdge();
-            case B -> t=card.B.getTypeEdge();
-            case C -> t=card.C.getTypeEdge();
-            case D -> t=card.D.getTypeEdge();
+            case A -> t= card.getA().getTypeEdge();
+            case B -> t= card.getB().getTypeEdge();
+            case C -> t= card.getC().getTypeEdge();
+            case D -> t= card.getD().getTypeEdge();
         }
         return t;
     }
     public Side.TypeEdge getLowerEdge(CLCard card, CLFieldPoint.Orientation ont){
         Side.TypeEdge t=null;
         switch(ont){
-            case A -> t=card.C.getTypeEdge();
-            case B -> t=card.D.getTypeEdge();
-            case C -> t=card.A.getTypeEdge();
-            case D -> t=card.B.getTypeEdge();
+            case A -> t= card.getC().getTypeEdge();
+            case B -> t= card.getD().getTypeEdge();
+            case C -> t= card.getA().getTypeEdge();
+            case D -> t= card.getB().getTypeEdge();
         }
         return t;
-    }
-    public void submitPlayerCard(String pid, CLCard card, int declaredx, int declaredy, CLFieldPoint.Orientation ont)
+    }*/
+  /*  public void submitPlayerCard(String pid, CLCard card, int declaredx, int declaredy, CLFieldPoint.Orientation ont)
             throws InvalidPlayerTurnException, InvalidSideEdgeSubmissionException {
         checkPlayerTurn(pid);
       //  ArrayList<CLCard> pHand = getPlayerHand(pid);
@@ -230,6 +230,7 @@ public class Game {
         }
         field.addCard(declaredx,declaredy,card,ont);
     }
+    */
 
 }
 

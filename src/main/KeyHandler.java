@@ -52,7 +52,6 @@ int code = e.getKeyCode();
             leftPressed = false;
         }
         if(code == KeyEvent.VK_P){
-
             ont+=1;
             if(ont ==4) ont=0;
         }
