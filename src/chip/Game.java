@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class Game {
     private int currentPlayer;
     private String[] playerIds;
-    private CLField field;
+
+    private CLFieldPoint currentPoint;
     private CLDeck deck;
    // private ArrayList<ArrayList<SuperMiple>> playerHand;
   //  private ArrayList<ArrayList<City>> playerCities;
@@ -53,24 +54,7 @@ public class Game {
        for (int i = 0; i < pids.length; i++) {
                 String namecolor = colors.get(i);
                 players[i] = new Playerp(pids[i],namecolor);
-              /* SuperMiple[] miple = new SuperMiple[8];
-                for(int k=0;k<8;k++){
-                    miple[k]=new SuperMiple();
 
-                }*/
-              /*  for (int j = 0; j < 8; j++) {
-                    miple[j].name =name;
-                    try{
-                        miple[j].image = ImageIO.read(getClass().getResourceAsStream("/resPlayer/"+name+".png"));
-
-                    }catch(IOException e){
-                        e.printStackTrace();;
-                    }
-
-                }
-
-                ArrayList<SuperMiple> hand = new ArrayList<SuperMiple>(Arrays.asList(miple));
-                playerHand.add(hand);*/
             }
 
         }
@@ -115,6 +99,12 @@ public class Game {
     public int getCurrentPlayerIndex() {
         return this.currentPlayer;
     }
+    public void setCurrentPoint(CLFieldPoint point){
+        this.currentPoint=point;
+    }
+    public boolean isItCurrentPoint(CLFieldPoint point){return this.currentPoint==point;}
+
+
     public String getPreviousPlayer() {
         int index=this.currentPlayer-1;
         if(index == -1){

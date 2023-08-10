@@ -228,8 +228,11 @@ public class CLField {
     public CLCard getCard(int x,int y){
         return points[x][y].getCard();
     }
-    public void addCard(int x, int y, CLCard card, int orientation){
+    public CLFieldPoint getClFieldPoint(int x,int y){return points[x][y];}
+    public CLFieldPoint addCard(int x, int y, CLCard card, int orientation){
         points[x][y] = new CLFieldPoint(card, orientation);
+        return points[x][y];
+
     }
     public boolean isMipleOkey(int x, int y,int x0,int y0,GamePanel gp){
         int a= gp.tileSize;

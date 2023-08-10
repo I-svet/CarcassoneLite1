@@ -228,7 +228,7 @@ public class GamePanel extends JPanel implements Runnable{
             int yOnMap = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))/this.tileSize;
 
             if(clField.isPointOkey(xOnMap,yOnMap,upCard,orientation)) {
-                clField.addCard(xOnMap, yOnMap, upCard, orientation);
+                game.setCurrentPoint(clField.addCard(xOnMap, yOnMap, upCard, orientation));
                 mH.p=true;
             }
           if(clDeck.isEmpty()){
@@ -250,21 +250,16 @@ public class GamePanel extends JPanel implements Runnable{
             int yOnMapCard = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))/this.tileSize;
             int xOnMapPoint = ((int)(player.worldX+(mH.x- player.screenX)*1.0/player.scale))%this.tileSize;
             int yOnMapPoint = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))%this.tileSize;
+            if(game.isItCurrentPoint(clField.getClFieldPoint(xOnMapCard,yOnMapCard))) {
+                if (clField.isMipleOkey(xOnMapCard, yOnMapCard, xOnMapPoint, yOnMapPoint, this)) {
+                    clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
+                    game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
+                    setPidName(game.changePlayer());
+                    upCard = clDeck.drawCard();
+                    mH.p = false;
 
-            if (clField.isMipleOkey(xOnMapCard,  yOnMapCard,xOnMapPoint, yOnMapPoint, this)) {
-
-                clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
-
-
-                game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
-                setPidName(game.changePlayer());
-                upCard = clDeck.drawCard();
-                mH.p=false;
-
-
-
+                }
             }
-
             mH.check2 = true;
         }
     }
