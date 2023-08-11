@@ -38,7 +38,7 @@ public class MiplePanel extends JPanel implements Runnable{
 ArrayList<SuperMiple> hand;
     public MiplePanel(GamePanel gp){
         this.gp=gp;
-this.game=gp.game;
+this.game=gp.getGame();
         this.hand=game.players[game.getCurrentPlayerIndex()].getHand();
 
         this.setBackground(Color.BLACK);
@@ -95,7 +95,7 @@ this.game=gp.game;
     }
 
     private void update() {
-        this.game=gp.game;
+        this.game=gp.getGame();
         this.hand=game.players[game.getCurrentPlayerIndex()].getHand();
 
     }

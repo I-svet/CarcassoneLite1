@@ -33,13 +33,13 @@ public class CLFieldPoint {
     public void drawMiple(int screenX,int screenY, Graphics2D g2,GamePanel gp){
         int ont1=orientation;
 
-        int x0= (int) (screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale);
-        int x1= (int) (screenX+(gp.tileSize-gp.mipleSize)* gp.player.scale);
-        int x2= (int) (screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale);
+        int x0= (int) (screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.getPlayer().scale);
+        int x1= (int) (screenX+(gp.tileSize-gp.mipleSize)* gp.getPlayer().scale);
+        int x2= (int) (screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.getPlayer().scale);
         int x3=screenX;
-        int y1= (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale);
-        int y2= (int) (screenY+(gp.tileSize-gp.mipleSize)* gp.player.scale);
-        int y3= (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale);
+        int y1= (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.getPlayer().scale);
+        int y2= (int) (screenY+(gp.tileSize-gp.mipleSize)* gp.getPlayer().scale);
+        int y3= (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.getPlayer().scale);
         int y0=screenY;
         Point[] a = new Point[4];
         a[0]=new Point(x0,y0);
@@ -48,12 +48,12 @@ public class CLFieldPoint {
         a[3]=new Point(x3,y3);
         for(int i=0;i<4;i++) {
             if (card.getSideM()[i % 4].miple != null) {
-                g2.drawImage(card.getSideM()[i % 4].miple.image, a[(i + ont1) % 4].x, a[(i + ont1) % 4].y, (int) ((int) gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
+                g2.drawImage(card.getSideM()[i % 4].miple.image, a[(i + ont1) % 4].x, a[(i + ont1) % 4].y, (int) ((int) gp.mipleSize * gp.getPlayer().scale), (int) (gp.mipleSize * gp.getPlayer().scale), null);
             }
         }
         if(card.getCenter() !=null){
             if(card.getCenter().miple!= null)
-            g2.drawImage(card.getCenter().miple.image, (int) ( screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale), (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.player.scale), (int) ((int) gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
+            g2.drawImage(card.getCenter().miple.image, (int) ( screenX+(gp.tileSize/2-gp.mipleSize/2)* gp.getPlayer().scale), (int) (screenY+(gp.tileSize/2-gp.mipleSize/2)* gp.getPlayer().scale), (int) ((int) gp.mipleSize * gp.getPlayer().scale), (int) (gp.mipleSize * gp.getPlayer().scale), null);
 
         }
     }

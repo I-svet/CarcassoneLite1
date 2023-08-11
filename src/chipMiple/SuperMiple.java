@@ -19,16 +19,16 @@ public class SuperMiple {
     }
 
     public void draw(Graphics2D g2, GamePanel gp) {
-        int screenX = (int) ((worldX - gp.player.worldX) * gp.player.scale + gp.player.screenX);
-        int screenY = (int) ((worldY - gp.player.worldY) * gp.player.scale + gp.player.screenY);
+        int screenX = (int) ((worldX - gp.getPlayer().worldX) * gp.getPlayer().scale + gp.getPlayer().screenX);
+        int screenY = (int) ((worldY - gp.getPlayer().worldY) * gp.getPlayer().scale + gp.getPlayer().screenY);
 
-        if(worldX*1.0*gp.player.scale+gp.tileSize*gp.player.scale>gp.player.worldX*1.0*gp.player.scale-gp.player.screenX &&
-                worldX*1.0*gp.player.scale-gp.tileSize*gp.player.scale<gp.player.worldX*1.0*gp.player.scale+gp.player.screenX &&
-                worldY*1.0*gp.player.scale+gp.tileSize*gp.player.scale>gp.player.worldY*1.0*gp.player.scale-gp.player.screenY &&
-                worldY*1.0*gp.player.scale-gp.tileSize*gp.player.scale<gp.player.worldY*1.0*gp.player.scale+gp.player.screenY){
+        if(worldX*1.0*gp.getPlayer().scale+gp.tileSize*gp.getPlayer().scale>gp.getPlayer().worldX*1.0*gp.getPlayer().scale-gp.getPlayer().screenX &&
+                worldX*1.0*gp.getPlayer().scale-gp.tileSize*gp.getPlayer().scale<gp.getPlayer().worldX*1.0*gp.getPlayer().scale+gp.getPlayer().screenX &&
+                worldY*1.0*gp.getPlayer().scale+gp.tileSize*gp.getPlayer().scale>gp.getPlayer().worldY*1.0*gp.getPlayer().scale-gp.getPlayer().screenY &&
+                worldY*1.0*gp.getPlayer().scale-gp.tileSize*gp.getPlayer().scale<gp.getPlayer().worldY*1.0*gp.getPlayer().scale+gp.getPlayer().screenY){
             Graphics2D g = (Graphics2D) g2;
 
-        g2.drawImage(image, screenX, screenY, (int) ( gp.mipleSize * gp.player.scale), (int) (gp.mipleSize * gp.player.scale), null);
+        g2.drawImage(image, screenX, screenY, (int) ( gp.mipleSize * gp.getPlayer().scale), (int) (gp.mipleSize * gp.getPlayer().scale), null);
 
           }
     }

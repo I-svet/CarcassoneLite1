@@ -15,11 +15,24 @@ public class Side {
         }
     }
 
-    public TypeEdge typeEdge;
+    private TypeEdge typeEdge;
 
-    public ArrayList<Side> connections;
-    public SuperMiple miple = null;
-    public boolean connected = false;
+    private ArrayList<Side> connections;
+
+    public ArrayList<Side> getConnections() {
+        return connections;
+    }
+
+    public SuperMiple getMiple() {
+        return miple;
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+     SuperMiple miple = null;
+     boolean connected = false;
 
     public Side(final TypeEdge typeEdge,final ArrayList<Side> connections){
         this.typeEdge = typeEdge;

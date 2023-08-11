@@ -15,7 +15,7 @@ public class City {
     public int scor =0;
     public City(Side side, Playerp player){
        players.add(player);
-       CityPart part = new CityPart(side.connections,player);
+       CityPart part = new CityPart(side.getConnections(),player);
        sides.add(part);
        openParts.add(part);
        scor += 1;

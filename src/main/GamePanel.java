@@ -33,48 +33,23 @@ public class GamePanel extends JPanel implements Runnable{
     public final int maxWorldWidth =tileSize*maxWorldCol;
     public final int maxWorldHeight =tileSize*maxWorldRow;
      final int FPS = 60;
-/*
-    private AddPlayerNames addPlayers = new AddPlayerNames();
-    ArrayList<String> temp =new ArrayList<>();
-    String[] pids;
-    public Game game;
-    ArrayList<String> cardsIds;
-    TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
 
-    public SuperChip[] chip =new SuperChip[72];
-    public CLDeck clDeck = new CLDeck();
 
-    public MouseHandler mH = new MouseHandler();
-    Thread gameThread;
-    public Player player = new Player(this,keyH,mH);
-    public AssetSetter aSetter = new AssetSetter(this);
-    public SuperMiple[] miple = new SuperMiple[10];
 
-    public CLCard upCard=new CLCard();
-    private CLField clField = new CLField(this);
-
-    public HashMap<String, BufferedImage> images = new HashMap<>();
-
-*/
     MouseHandler mH = new MouseHandler();
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     TileManager tileM = new TileManager(this);
     CLField clField = new CLField(this);
 
-    public Player player = new Player(this,keyH,mH);
+     Player player = new Player(this,keyH,mH);
 
-    public CLDeck clDeck = new CLDeck();
-    public CLCard upCard=new CLCard();
-    public Game game;
+     CLDeck clDeck = new CLDeck();
+     CLCard upCard=new CLCard();
+     Game game;
 
-
-
-    AddPlayerNames addPlayers = new AddPlayerNames();
-    ArrayList<String> temp =new ArrayList<>();
+    ArrayList<String> temp;
     String[] pids;
-    ArrayList<String> cardsIds;
     SuperChip[] chip =new SuperChip[72];
     SuperMiple[] miple = new SuperMiple[10];
     public HashMap<String, BufferedImage> images = new HashMap<>();
@@ -82,10 +57,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     public GamePanel(ArrayList<String> playerIds,JLabel jLabel1){
         super(true);
-
-
-
-
         upCard.city1();
         clDeck.reset();
         clDeck.shuffle();
@@ -98,9 +69,6 @@ public class GamePanel extends JPanel implements Runnable{
            game.start(game);
            setPidName(game);
 
-
-
-
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -108,11 +76,6 @@ public class GamePanel extends JPanel implements Runnable{
         this.addMouseWheelListener(mH);
         this.setFocusable(true);
         this.addMouseListener(mH);
-
-
-
-
-        
     }
     public void setPidName(Game game) {
         String currentPlayer=game.getCurrentPlayer();
@@ -130,14 +93,6 @@ public class GamePanel extends JPanel implements Runnable{
 
 
     public void paintComponent(Graphics g){
-      /*  attampt to do double buffered painting
-      Graphics offgc;
-        Image offscreen = null;
-        offscreen = gp.createImage(gp.screenWidth, gp.screenHeight);
-        offgc = offscreen.getGraphics();
-        offgc.setColor(Color.BLACK);
-        offgc.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
-        offgc.setColor(Color.BLACK);*/
         Graphics2D g2=(Graphics2D) g;
         long drawStart=0;
         long drawEnd1=0;
@@ -264,6 +219,126 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
+
+    public int getOriginalTileSize() {
+        return originalTileSize;
+    }
+
+    public int getOriginalMipleSize() {
+        return originalMipleSize;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getScaleM() {
+        return scaleM;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
+
+    public int getMipleSize() {
+        return mipleSize;
+    }
+
+    public int getMaxScreenCol() {
+        return maxScreenCol;
+    }
+
+    public int getMaxScreenRow() {
+        return maxScreenRow;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public int getMaxWorldCol() {
+        return maxWorldCol;
+    }
+
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public int getMaxWorldWidth() {
+        return maxWorldWidth;
+    }
+
+    public int getMaxWorldHeight() {
+        return maxWorldHeight;
+    }
+
+    public int getFPS() {
+        return FPS;
+    }
+
+    public MouseHandler getmH() {
+        return mH;
+    }
+
+    public KeyHandler getKeyH() {
+        return keyH;
+    }
+
+    public Thread getGameThread() {
+        return gameThread;
+    }
+
+    public TileManager getTileM() {
+        return tileM;
+    }
+
+    public CLField getClField() {
+        return clField;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public CLDeck getClDeck() {
+        return clDeck;
+    }
+
+    public CLCard getUpCard() {
+        return upCard;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public ArrayList<String> getTemp() {
+        return temp;
+    }
+
+    public String[] getPids() {
+        return pids;
+    }
+
+    public SuperChip[] getChip() {
+        return chip;
+    }
+
+    public SuperMiple[] getMiple() {
+        return miple;
+    }
+
+    public HashMap<String, BufferedImage> getImages() {
+        return images;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
 
 }
 

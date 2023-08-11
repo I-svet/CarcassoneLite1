@@ -38,10 +38,10 @@ public class Player extends Entity{
     }
     public void getPlayerImage(){
         try{
-            green = ImageIO.read(getClass().getResourceAsStream("/resPlayer/green.png"));
-            red = ImageIO.read(getClass().getResourceAsStream("/resPlayer/red.png"));
-            blue = ImageIO.read(getClass().getResourceAsStream("/resPlayer/blue.png"));
-            yellow = ImageIO.read(getClass().getResourceAsStream("/resPlayer/yellow.png"));
+            green = ImageIO.read(getClass().getResourceAsStream("/resplayer/green.png"));
+            red = ImageIO.read(getClass().getResourceAsStream("/resplayer/red.png"));
+            blue = ImageIO.read(getClass().getResourceAsStream("/resplayer/blue.png"));
+            yellow = ImageIO.read(getClass().getResourceAsStream("/resplayer/yellow.png"));
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -49,23 +49,23 @@ public class Player extends Entity{
 
 
     public void update(){
-        if(worldY>(gp.tileSize*2)/gp.player.scale-100/gp.player.scale-gp.mipleSize/2){
+        if(worldY>(gp.tileSize*2)/gp.getPlayer().scale-100/gp.getPlayer().scale-gp.mipleSize/2){
         if (keyH.upPressed==true){
-            worldY-=(speed*1.0/gp.player.scale);
+            worldY-=(speed*1.0/gp.getPlayer().scale);
         }}
-        if(worldY< gp.maxWorldHeight+100/gp.player.scale-gp.mipleSize/2-( gp.tileSize*2)/gp.player.scale) {
+        if(worldY< gp.maxWorldHeight+100/gp.getPlayer().scale-gp.mipleSize/2-( gp.tileSize*2)/gp.getPlayer().scale) {
             if (keyH.downPressed == true) {
-                worldY +=  (speed*1.0/gp.player.scale);
+                worldY +=  (speed*1.0/gp.getPlayer().scale);
             }
-        }if(worldX< gp.maxWorldWidth-( gp.tileSize*2)/gp.player.scale
+        }if(worldX< gp.maxWorldWidth-( gp.tileSize*2)/gp.getPlayer().scale
                 +gp.mipleSize/2) {
             if (keyH.rightPressed == true) {
-                worldX += (speed*1.0/gp.player.scale);
+                worldX += (speed*1.0/gp.getPlayer().scale);
             }
         }
-        if(worldX>(gp.tileSize*2)/gp.player.scale-gp.mipleSize/2){
+        if(worldX>(gp.tileSize*2)/gp.getPlayer().scale-gp.mipleSize/2){
         if (keyH.leftPressed==true){
-            worldX-= (speed*1.0/gp.player.scale);
+            worldX-= (speed*1.0/gp.getPlayer().scale);
         }}
         ont=keyH.ont;
         scale=mH.scale;

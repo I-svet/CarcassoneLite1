@@ -313,21 +313,21 @@ if(points[x][y].card.getCenter() !=null){
 
 
     public void draw(Graphics2D g2,GamePanel gp) {
-        int worldCol = (int) (gp.player.worldX - gp.player.screenX * 1.0 / gp.player.scale - gp.tileSize) / gp.tileSize + 1;
+        int worldCol = (int) (gp.getPlayer().worldX - gp.getPlayer().screenX * 1.0 / gp.getPlayer().scale - gp.tileSize) / gp.tileSize + 1;
         if(worldCol<0) worldCol=0;
         int worldColl = worldCol;
-        int worldRow = (int) (gp.player.worldY - gp.player.screenY * 1.0 / gp.player.scale - gp.tileSize) / gp.tileSize + 1;
+        int worldRow = (int) (gp.getPlayer().worldY - gp.getPlayer().screenY * 1.0 / gp.getPlayer().scale - gp.tileSize) / gp.tileSize + 1;
         if(worldRow<0) worldRow=0;
-        int worldCol2 = (int) (gp.player.worldX + gp.player.screenX / gp.player.scale + gp.tileSize) / gp.tileSize ;
+        int worldCol2 = (int) (gp.getPlayer().worldX + gp.getPlayer().screenX / gp.getPlayer().scale + gp.tileSize) / gp.tileSize ;
         if (worldCol2>71) worldCol2=71;
-        int worldRow2 = (int) (gp.player.worldY + gp.player.screenY / gp.player.scale + gp.tileSize) / gp.tileSize;
+        int worldRow2 = (int) (gp.getPlayer().worldY + gp.getPlayer().screenY / gp.getPlayer().scale + gp.tileSize) / gp.tileSize;
         if(worldRow2>71) worldRow2=71;
         while(worldCol < worldCol2 && worldRow <worldRow2 ){
             if(points[worldCol][worldRow]!=null) {
                     int worldX = worldCol * gp.tileSize;
                     int worldY = worldRow * gp.tileSize;
-                    int screenX = (int) ((worldX - gp.player.worldX) * gp.player.scale + gp.player.screenX);
-                    int screenY = (int) ((worldY - gp.player.worldY) * gp.player.scale + gp.player.screenY);
+                    int screenX = (int) ((worldX - gp.getPlayer().worldX) * gp.getPlayer().scale + gp.getPlayer().screenX);
+                    int screenY = (int) ((worldY - gp.getPlayer().worldY) * gp.getPlayer().scale + gp.getPlayer().screenY);
 
 
                         int ont =points[worldCol][worldRow].getOrientation();
@@ -346,9 +346,9 @@ if(points[x][y].card.getCenter() !=null){
                         at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
                         final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
                         rotateOp.filter(image, rotatedImage);*/
-                       // g2.drawImage(rotatedImage, screenX, screenY, (int) ((int) gp.tileSize * gp.player.scale), (int) (gp.tileSize * gp.player.scale), null);
+                       // g2.drawImage(rotatedImage, screenX, screenY, (int) ((int) gp.tileSize * gp.getPlayer().scale), (int) (gp.tileSize * gp.getPlayer().scale), null);
 
-                g2.drawImage(image, screenX, screenY, (int) (gp.tileSize * gp.player.scale), (int) (gp.tileSize * gp.player.scale), null);
+                g2.drawImage(image, screenX, screenY, (int) (gp.tileSize * gp.getPlayer().scale), (int) (gp.tileSize * gp.getPlayer().scale), null);
 
                 if(points[worldCol][worldRow].card!=null){
                         points[worldCol][worldRow].drawMiple(screenX,screenY,g2,gp);

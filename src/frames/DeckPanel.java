@@ -89,9 +89,9 @@ public class DeckPanel extends JPanel  implements Runnable,KeyListener{
 
     private void update() {
 
-        this.ont=gp.player.ont;
-        this.clDeck=gp.clDeck;
-        this.upCard=gp.upCard;
+        this.ont=gp.getPlayer().ont;
+        this.clDeck=gp.getClDeck();
+        this.upCard=gp.getUpCard();
     }
     public void draw(int ont, Graphics g, CLCard upCard){
         super.paintComponent(g);
