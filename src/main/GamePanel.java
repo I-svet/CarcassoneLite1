@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
      CLDeck clDeck = new CLDeck();
      CLCard upCard=new CLCard();
      Game game;
-
+     boolean putcard=false;
     ArrayList<String> temp;
     String[] pids;
     SuperChip[] chip =new SuperChip[72];
@@ -173,51 +173,52 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
-    public void update(){
-       player.update();
+    public void update() {
+        player.update();
 
-        if(!mH.check){
+        if (!mH.check) {
             int orientation = keyH.ont;
+            putcard=true;
+            int xOnMap = ((int) (player.worldX + (mH.x - player.screenX) * 1.0 / player.scale)) / this.tileSize;
+            int yOnMap = ((int) (player.worldY + (mH.y - player.screenY) * 1.0 / player.scale)) / this.tileSize;
 
-            int xOnMap = ((int)(player.worldX+(mH.x- player.screenX)*1.0/player.scale))/this.tileSize;
-            int yOnMap = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))/this.tileSize;
-
-            if(clField.isPointOkey(xOnMap,yOnMap,upCard,orientation)) {
+            if (clField.isPointOkey(xOnMap, yOnMap, upCard, orientation)) {
                 game.setCurrentPoint(clField.addCard(xOnMap, yOnMap, upCard, orientation));
-                mH.p=true;
+                mH.p = true;
             }
-          if(clDeck.isEmpty()){
-               JLabel message4 = new JLabel("Game is over");
-               message4.setFont(new Font("Arial", Font.BOLD,48));
-               JOptionPane.showMessageDialog(null,message4);
-               System.exit(0);
-           }
-            mH.check=true;
+            if (clDeck.isEmpty()) {
+                JLabel message4 = new JLabel("Game is over");
+                message4.setFont(new Font("Arial", Font.BOLD, 48));
+                JOptionPane.showMessageDialog(null, message4);
+                System.exit(0);
+            }
+            mH.check = true;
         }
-        if(keyH.skip){
-            keyH.skip =false;
-            setPidName(game.changePlayer());
-            upCard = clDeck.drawCard();
-            mH.p=false;
-        }else
-        if((!mH.check2)&&(mH.p)) {
-            int xOnMapCard = ((int)(player.worldX+(mH.x- player.screenX)*1.0/player.scale))/this.tileSize;
-            int yOnMapCard = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))/this.tileSize;
-            int xOnMapPoint = ((int)(player.worldX+(mH.x- player.screenX)*1.0/player.scale))%this.tileSize;
-            int yOnMapPoint = ((int)(player.worldY+(mH.y- player.screenY)*1.0/player.scale))%this.tileSize;
-            if(game.isItCurrentPoint(clField.getClFieldPoint(xOnMapCard,yOnMapCard))) {
-                if (clField.isMipleOkey(xOnMapCard, yOnMapCard, xOnMapPoint, yOnMapPoint, this)) {
-                    clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
-                    game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
-                    setPidName(game.changePlayer());
-                    upCard = clDeck.drawCard();
-                    mH.p = false;
+            if ((keyH.skip)&&(putcard)) {
+                keyH.skip = false;
+                putcard=false;
+                setPidName(game.changePlayer());
+                upCard = clDeck.drawCard();
+                mH.p = false;
+            } else if ((!mH.check2) && (mH.p)) {
+                putcard=false;
+                int xOnMapCard = ((int) (player.worldX + (mH.x - player.screenX) * 1.0 / player.scale)) / this.tileSize;
+                int yOnMapCard = ((int) (player.worldY + (mH.y - player.screenY) * 1.0 / player.scale)) / this.tileSize;
+                int xOnMapPoint = ((int) (player.worldX + (mH.x - player.screenX) * 1.0 / player.scale)) % this.tileSize;
+                int yOnMapPoint = ((int) (player.worldY + (mH.y - player.screenY) * 1.0 / player.scale)) % this.tileSize;
+                if (game.isItCurrentPoint(clField.getClFieldPoint(xOnMapCard, yOnMapCard))) {
+                    if (clField.isMipleOkey(xOnMapCard, yOnMapCard, xOnMapPoint, yOnMapPoint, this)) {
+                        clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
+                        game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
+                        setPidName(game.changePlayer());
+                        upCard = clDeck.drawCard();
+                        mH.p = false;
 
+                    }
                 }
+                mH.check2 = true;
             }
-            mH.check2 = true;
         }
-    }
 
 
     public int getOriginalTileSize() {
