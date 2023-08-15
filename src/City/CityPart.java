@@ -19,6 +19,12 @@ ArrayList<Side> opensides;
     {
          this.sides = sides;
     }
+    public void sidesAddToCity(City city){
+        for(Side side : sides ) {
+        side.setCity(city);
+        }
+    }
+
 
     public ArrayList<Side> getSides() {
         return sides;

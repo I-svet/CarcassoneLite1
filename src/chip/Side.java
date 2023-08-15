@@ -1,5 +1,6 @@
 package chip;
 
+import City.City;
 import chipMiple.SuperMiple;
 
 import java.util.ArrayList;
@@ -16,9 +17,31 @@ public class Side {
     }
 
     private TypeEdge typeEdge;
-
-
+    private Side oppositeSide=null;
+    private  SuperMiple miple = null;
+    private boolean connected = false;
     private ArrayList<Side> connections;
+    private City city=null;
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+
+
+    public void setOppositeSide(Side oppositeSide) {
+        this.oppositeSide = oppositeSide;
+    }
+
+    public Side getOppositeSide() {
+        return oppositeSide;
+    }
+
+
 
     public ArrayList<Side> getConnections() {
         return connections;
@@ -37,8 +60,7 @@ public class Side {
         this.miple = miple;
     }
 
-    private  SuperMiple miple = null;
-     private boolean connected = false;
+
      public void connect(){connected=true;}
 
     public Side(final TypeEdge typeEdge,final ArrayList<Side> connections){

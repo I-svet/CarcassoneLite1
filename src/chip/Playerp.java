@@ -40,6 +40,11 @@ public class Playerp {
 
          hand = new ArrayList<SuperMiple>(Arrays.asList(miple));
     }
+    public void finishCity(City city){
+        scor+=city.getScor();
+        hand.addAll(city.getMiples());
+        cities.remove(city);
+    }
     public ArrayList<SuperMiple> getHand(){
         return this.hand;
     }

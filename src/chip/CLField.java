@@ -207,11 +207,9 @@ public class CLField {
         if(points[x][y]!=null) t=false;
         if(points[x-1][y]==null && points[x+1][y]==null && points[x][y-1]==null && points[x][y+1]==null) t = false;
 
-       if (points[x - 1][y] != null) {
-
+        if (points[x - 1][y] != null) {
            if (points[x - 1][y].getRightSide().getTypeEdge() != leftSide.getTypeEdge()) t = false;
-
-       }
+        }
         if (points[x + 1][y] != null) {
             if( points[x + 1][y].getLeftSide().getTypeEdge() != rightSide.getTypeEdge()) t=false;
         }
@@ -233,6 +231,19 @@ public class CLField {
     public CLFieldPoint getClFieldPoint(int x,int y){return points[x][y];}
     public CLFieldPoint addCard(int x, int y, CLCard card, int orientation){
         points[x][y] = new CLFieldPoint(card, orientation);
+        if (points[x - 1][y] != null) {
+            points[x][y].getLeftSide().setOppositeSide(points[x - 1][y].getRightSide());
+        }
+        if (points[x + 1][y] != null) {
+            points[x][y].getRightSide().setOppositeSide(points[x + 1][y].getLeftSide());
+        }
+        if (points[x][y-1] != null) {
+            points[x][y].getUpSide().setOppositeSide(points[x][y-1].getDownSide());
+        }
+        if (points[x][y+1] != null) {
+            points[x][y].getDownSide().setOppositeSide(points[x][y+1].getUpSide());
+        }
+
         return points[x][y];
 
     }
@@ -373,12 +384,12 @@ if(points[x][y].card.getCenter() !=null){
 
 
     }
-    public void AddParts(City city, CityPart part,CLFieldPoint point) {
+    public void AddParts(City city, CityPart part) {
         for (Side side : part.getOpensides()) {
-            /*
-             if(side.oppositeSide!= null)
-             AddParts(city, city.addOnePart(part,side,side.oppositeSide), pointOfNewPart);
-            */
+
+             if(side.getOppositeSide()!= null)
+             AddParts(city, city.addOnePart(part,side,side.getOppositeSide()));
+
 
         }
     }
