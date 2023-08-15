@@ -4,6 +4,8 @@ import main.GamePanel;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 public class CLFieldPoint {
@@ -27,7 +29,9 @@ public class CLFieldPoint {
      Side downSide;
      Side leftSide;
      Side rightSide;
+
      Orientation ont;
+   //  HashMap<Side,Side> oppositeSides;
     int orientation;
 
     public void drawMiple(int screenX,int screenY, Graphics2D g2,GamePanel gp){
@@ -47,8 +51,8 @@ public class CLFieldPoint {
         a[2]=new Point(x2,y2);
         a[3]=new Point(x3,y3);
         for(int i=0;i<4;i++) {
-            if (card.getSideM()[i % 4].miple != null) {
-                g2.drawImage(card.getSideM()[i % 4].miple.image, a[(i + ont1) % 4].x, a[(i + ont1) % 4].y, (int) ((int) gp.mipleSize * gp.getPlayer().scale), (int) (gp.mipleSize * gp.getPlayer().scale), null);
+            if (card.getSideM()[i % 4].getMiple() != null) {
+                g2.drawImage(card.getSideM()[i % 4].getMiple().image, a[(i + ont1) % 4].x, a[(i + ont1) % 4].y, (int) ((int) gp.mipleSize * gp.getPlayer().scale), (int) (gp.mipleSize * gp.getPlayer().scale), null);
             }
         }
         if(card.getCenter() !=null){
@@ -79,13 +83,15 @@ public class CLFieldPoint {
         this.ont = Orientation.getOrientation(orientation);
         this.card=card;
         this.orientation = orientation;
-
-            ArrayList<Side> sides = new ArrayList<>(List.of(card.getA(), card.getD(), card.getC(),card.getB() ));
-            upSide = sides.get(orientation);
-            rightSide = sides.get((orientation + 3) % 4);
-            downSide = sides.get((orientation + 2) % 4);
-            leftSide = sides.get((orientation + 1) % 4);
-
+        ArrayList<Side> sides = new ArrayList<>(List.of(card.getA(), card.getD(), card.getC(),card.getB() ));
+        upSide = sides.get(orientation);
+        rightSide = sides.get((orientation + 3) % 4);
+        downSide = sides.get((orientation + 2) % 4);
+        leftSide = sides.get((orientation + 1) % 4);
+        /*oppositeSides.put(upSide,null);
+        oppositeSides.put(downSide,null);
+        oppositeSides.put(rightSide,null);
+        oppositeSides.put(leftSide,null);*/
     }
     public CLCard getCard(){
         return this.card;

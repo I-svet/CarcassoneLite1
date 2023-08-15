@@ -1,6 +1,8 @@
 package chip;
 
 
+import City.City;
+import City.CityPart;
 import chipMiple.SuperMiple;
 import main.GamePanel;
 
@@ -246,10 +248,10 @@ public class CLField {
             if (x0 > a / 3) {
                 if (x0 <= 2 * a / 3) {
                     if (y0 < a / 3) {
-                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].miple == null;
+                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].getMiple() == null;
                     } else {
                         if (y0 > 2 * a / 3) {
-                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].miple == null;
+                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].getMiple() == null;
                         } else {
                             if(points[x][y].card.getCenter() != null)
                             t = points[x][y].card.getCenter().miple == null;
@@ -257,13 +259,13 @@ public class CLField {
                     }
                 } else {
                     if (b) {
-                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].miple == null;
+                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].getMiple() == null;
                     }
                 }
 
             } else {
                 if (b) {
-                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].miple == null;
+                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].getMiple() == null;
 
                 }
             }
@@ -281,11 +283,11 @@ public class CLField {
         if(x0>a/3){
            if(x0<=2*a/3) {
                if(y0<a/3){
-                   points[x][y].card.getSideM()[(4-ont1)%4].miple=miple;
+                   points[x][y].card.getSideM()[(4-ont1)%4].setMiple(miple);
                }
                else{
                    if(y0>2*a/3){
-                       points[x][y].card.getSideM()[(6-ont1)%4].miple=miple;
+                       points[x][y].card.getSideM()[(6-ont1)%4].setMiple(miple);
                    }
                    else{
 if(points[x][y].card.getCenter() !=null){
@@ -297,7 +299,7 @@ if(points[x][y].card.getCenter() !=null){
            else {
                if(b)
                {
-                   points[x][y].card.getSideM()[(5-ont1)%4].miple=miple;
+                   points[x][y].card.getSideM()[(5-ont1)%4].setMiple(miple);
                }
            }
 
@@ -305,7 +307,7 @@ if(points[x][y].card.getCenter() !=null){
         else{
             if(b)
             {
-                points[x][y].card.getSideM()[(7-ont1)%4].miple=miple;
+                points[x][y].card.getSideM()[(7-ont1)%4].setMiple(miple);
             }
         }
 
@@ -370,6 +372,15 @@ if(points[x][y].card.getCenter() !=null){
 
 
 
+    }
+    public void AddParts(City city, CityPart part,CLFieldPoint point) {
+        for (Side side : part.getOpensides()) {
+            /*
+             if(side.oppositeSide!= null)
+             AddParts(city, city.addOnePart(part,side,side.oppositeSide), pointOfNewPart);
+            */
+
+        }
     }
 
 }
