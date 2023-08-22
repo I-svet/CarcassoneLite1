@@ -54,7 +54,7 @@ public class DeckPanel extends JPanel  implements Runnable,KeyListener{
             e.printStackTrace();
         }
 
-//if(upCard!= null)
+            if(upCard!= null)
             draw(this.ont, g2, upCard);
 
 

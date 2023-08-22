@@ -2,6 +2,8 @@ package chip;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class CLCard {
     public Side getA() {
@@ -107,10 +109,14 @@ public class CLCard {
         return getA().getTypeEdge()+" "+ getB().getTypeEdge()+" "+ getC().getTypeEdge()+" " + getC().getTypeEdge()+" "+ getCenter().getCenter()+" "+ getType();
     }
     public CLCard city1(){
-        this.setA(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
-        this.setB(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
+        this.setA(new Side(Side.TypeEdge.City, new ArrayList<>()));
+        this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));
-        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
+        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
         this.setType(Type.City1);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -121,10 +127,14 @@ public class CLCard {
         return this;
     }
     public CLCard city2(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
         this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.City, new ArrayList<>()));
-        this.setD(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setD(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getD())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getD())));
         this.setType(Type.City2);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -134,11 +144,30 @@ public class CLCard {
 
         return this;
     }
-    public CLCard city3(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
+   /* public CLCard city3(){
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Collections.singletonList(getA()))));
         this.setB(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getB(), getC()))));
         this.setC(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getB(), getC()))));
-        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>()));
+        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>(Collections.singletonList(getD()))));
+        this.setType(Type.City3);
+        this.setCenter(null);
+        this.getSideM()[0]= this.getA();
+        this.getSideM()[1]= this.getB();
+        this.getSideM()[2]= this.getC();
+        this.getSideM()[3]= this.getD();
+
+        return this;
+    }*/
+    public CLCard city3(){
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));//Collections.singletonList(getA())
+        this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));//Arrays.asList(getB(), getD())
+        this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));//Collections.singletonList(getC())
+        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>()));//Arrays.asList(getB(), getD())
+
+        this.getA().setConnections(new ArrayList<>(Collections.singletonList(getA())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getB(), getD())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getB(), getD())));
         this.setType(Type.City3);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -149,10 +178,15 @@ public class CLCard {
         return this;
     }
     public CLCard city4(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
         this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));
-        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>()));
+
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getC())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getA(), getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getC())));
         this.setType(Type.City4);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -163,11 +197,19 @@ public class CLCard {
         return this;
     }
     public CLCard city5(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
+
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
         this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
-        this.setC(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
-        this.setD(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
+        this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setD(new Side(Side.TypeEdge.field, new ArrayList<>()));
+
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+
         this.setType(Type.City5);
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getB())));
         this.getSideM()[0]= this.getA();
         this.getSideM()[1]= this.getB();
         this.getSideM()[2]= this.getC();
@@ -177,10 +219,16 @@ public class CLCard {
         return this;
     }
     public CLCard CityCornerCHF(){
-        this.setA(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setA(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setB(new Side(Side.TypeEdge.field, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));
-        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>()));
+
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getD())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getD())));
+
         this.setType(Type.CityCornerCHF);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -191,10 +239,14 @@ public class CLCard {
         return this;
     }
     public CLCard Monastery(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD()))));
-        this.setB(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD()))));
-        this.setC(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD()))));
-        this.setD(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD()))));
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setB(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setD(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getC(), getB(), getD())));
         this.setType(Type.Monastery);
         this.setCenter(new Center(Center.CenterC.monastery));
         this.getSideM()[0]= this.getA();
@@ -205,10 +257,15 @@ public class CLCard {
         return this;
     }
     public CLCard Road1(){
-        this.setA(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getA(), getC()))));
+        this.setA(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setB(new Side(Side.TypeEdge.field, new ArrayList<>()));
-        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getA(), getC()))));
+        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setD(new Side(Side.TypeEdge.field, new ArrayList<>()));
+
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getC())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getA(), getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getD())));
         this.setType(Type.Road1);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -219,10 +276,14 @@ public class CLCard {
         return this;
     }
     public CLCard Road2(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB()))));
-        this.setB(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB()))));
-        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getC(), getD()))));
-        this.setD(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getC(), getD()))));
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setB(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.setD(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getB())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getA(), getB())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getC(), getD())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getC(), getD())));
         this.setType(Type.Road2);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -237,6 +298,10 @@ public class CLCard {
         this.setB(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setD(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Collections.singletonList(getA())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getD())));
         this.setType(Type.Road3);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -251,6 +316,10 @@ public class CLCard {
         this.setB(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setD(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Collections.singletonList(getA())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getD())));
         this.setType(Type.Road4);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -261,10 +330,14 @@ public class CLCard {
         return this;
     }
     public CLCard Road5(){
-        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB()))));
-        this.setB(new Side(Side.TypeEdge.field, new ArrayList<>(Arrays.asList(getA(), getB()))));
-        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getC(), getD()))));
-        this.setD(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getC(), getD()))));
+        this.setA(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setB(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.setD(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getB())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getA(), getB())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getC(), getD())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getC(), getD())));
         this.setType(Type.Road5);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -275,10 +348,14 @@ public class CLCard {
         return this;
     }
     public CLCard RoadCity1(){
-        this.setA(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setA(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.field, new ArrayList<>()));
-        this.setD(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getA(), getD()))));
+        this.setD(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getD())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getD())));
         this.setType(Type.RoadCity1);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -293,6 +370,10 @@ public class CLCard {
         this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setD(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Collections.singletonList(getA())));
+        this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getD())));
         this.setType(Type.RoadCity2);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -303,10 +384,14 @@ public class CLCard {
         return this;
     }
     public CLCard RoadCity3(){
-        this.setA(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
-        this.setB(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
+        this.setA(new Side(Side.TypeEdge.City, new ArrayList<>()));
+        this.setB(new Side(Side.TypeEdge.City, new ArrayList<>()));
         this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
-        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>(Arrays.asList(getA(), getB(), getD()))));
+        this.setD(new Side(Side.TypeEdge.City, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
+        this.getC().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Arrays.asList(getA(), getB(), getD())));
         this.setType(Type.RoadCity3);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();
@@ -318,9 +403,13 @@ public class CLCard {
     }
     public CLCard RoadCity4(){
         this.setA(new Side(Side.TypeEdge.City, new ArrayList<>()));
-        this.setB(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getB(), getC()))));
-        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>(Arrays.asList(getB(), getC()))));
+        this.setB(new Side(Side.TypeEdge.road, new ArrayList<>()));
+        this.setC(new Side(Side.TypeEdge.road, new ArrayList<>()));
         this.setD(new Side(Side.TypeEdge.field, new ArrayList<>()));
+        this.getA().setConnections(new ArrayList<>(Collections.singletonList(getA())));
+        this.getB().setConnections(new ArrayList<>(Arrays.asList(getB(), getC())));
+        this.getC().setConnections(new ArrayList<>(Arrays.asList(getB(), getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getD())));
         this.setType(Type.RoadCity4);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();

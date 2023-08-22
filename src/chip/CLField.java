@@ -9,6 +9,7 @@ import main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static chip.CLFieldPoint.Orientation.A;
@@ -233,15 +234,20 @@ public class CLField {
         points[x][y] = new CLFieldPoint(card, orientation);
         if (points[x - 1][y] != null) {
             points[x][y].getLeftSide().setOppositeSide(points[x - 1][y].getRightSide());
+            points[x-1][y].getRightSide().setOppositeSide(points[x][y].getLeftSide());
+
         }
         if (points[x + 1][y] != null) {
             points[x][y].getRightSide().setOppositeSide(points[x + 1][y].getLeftSide());
+            points[x+1][y].getLeftSide().setOppositeSide(points[x][y].getRightSide());
         }
         if (points[x][y-1] != null) {
             points[x][y].getUpSide().setOppositeSide(points[x][y-1].getDownSide());
+            points[x][y-1].getDownSide().setOppositeSide(points[x][y].getUpSide());
         }
         if (points[x][y+1] != null) {
             points[x][y].getDownSide().setOppositeSide(points[x][y+1].getUpSide());
+            points[x][y+1].getUpSide().setOppositeSide(points[x][y].getDownSide());
         }
 
         return points[x][y];
@@ -259,10 +265,11 @@ public class CLField {
             if (x0 > a / 3) {
                 if (x0 <= 2 * a / 3) {
                     if (y0 < a / 3) {
-                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].getMiple() == null;
+                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(4 - ont1) % 4].getCity() == null;
+
                     } else {
                         if (y0 > 2 * a / 3) {
-                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].getMiple() == null;
+                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(6 - ont1) % 4].getCity() == null;
                         } else {
                             if(points[x][y].card.getCenter() != null)
                             t = points[x][y].card.getCenter().miple == null;
@@ -270,13 +277,13 @@ public class CLField {
                     }
                 } else {
                     if (b) {
-                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].getMiple() == null;
+                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(5 - ont1) % 4].getCity() == null;
                     }
                 }
 
             } else {
                 if (b) {
-                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].getMiple() == null;
+                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(7 - ont1) % 4].getCity() == null;
 
                 }
             }
@@ -285,7 +292,7 @@ public class CLField {
         return t;
     }
 
-    public void addMiple(int x, int y, SuperMiple miple,int x0,int y0,GamePanel gp){
+    public synchronized  void addMiple(int x, int y, SuperMiple miple,int x0,int y0,GamePanel gp,Playerp player){
         int ont1=0;
         int a= gp.tileSize;
         ont1 =points[x][y].getOrientation();
@@ -295,10 +302,20 @@ public class CLField {
            if(x0<=2*a/3) {
                if(y0<a/3){
                    points[x][y].card.getSideM()[(4-ont1)%4].setMiple(miple);
+                   if(points[x][y].card.getSideM()[(4-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
+                       City newCity = new City(points[x][y].card.getSideM()[(4-ont1)%4],player);
+                       player.addCity(newCity);
+                       AddParts(newCity,points[x][y].card.getSideM()[(4-ont1)%4]);
+                   }
                }
                else{
                    if(y0>2*a/3){
                        points[x][y].card.getSideM()[(6-ont1)%4].setMiple(miple);
+                       if(points[x][y].card.getSideM()[(6-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
+                           City newCity = new City(points[x][y].card.getSideM()[(6 - ont1) % 4], player);
+                           player.addCity(newCity);
+                           AddParts(newCity,points[x][y].card.getSideM()[(6-ont1)%4]);
+                       }
                    }
                    else{
 if(points[x][y].card.getCenter() !=null){
@@ -311,6 +328,11 @@ if(points[x][y].card.getCenter() !=null){
                if(b)
                {
                    points[x][y].card.getSideM()[(5-ont1)%4].setMiple(miple);
+                   if(points[x][y].card.getSideM()[(5-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
+                       City newCity = new City(points[x][y].card.getSideM()[(5 - ont1) % 4], player);
+                       player.addCity(newCity);
+                       AddParts(newCity,points[x][y].card.getSideM()[(5-ont1)%4]);
+                   }
                }
            }
 
@@ -319,6 +341,11 @@ if(points[x][y].card.getCenter() !=null){
             if(b)
             {
                 points[x][y].card.getSideM()[(7-ont1)%4].setMiple(miple);
+                if(points[x][y].card.getSideM()[(7-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
+                    City newCity = new City(points[x][y].card.getSideM()[(7 - ont1) % 4], player);
+                    player.addCity(newCity);
+                    AddParts(newCity,points[x][y].card.getSideM()[(7-ont1)%4]);
+                }
             }
         }
 
@@ -384,13 +411,34 @@ if(points[x][y].card.getCenter() !=null){
 
 
     }
-    public void AddParts(City city, CityPart part) {
-        for (Side side : part.getOpensides()) {
+    public synchronized void AddParts(City city, Side side) {
+        Iterator<Side> iterator = side.getCityPart().getOpensides().iterator();
 
-             if(side.getOppositeSide()!= null)
-             AddParts(city, city.addOnePart(part,side,side.getOppositeSide()));
+        while(iterator.hasNext()){
+            Side siddde = iterator.next();
+            //System.out.println("iteration  "+side.getCityPart()+" "+siddde);
+
+            if(siddde.getOppositeSide()!= null) {
+
+                city.addOnePart(siddde, siddde.getOppositeSide()); //TODO
+               // System.out.println("close " + siddde );
+                iterator.remove();
+
+                 AddParts(city, siddde.getOppositeSide());
+            }
+            else System.out.println(siddde.getOppositeSide() +" is null");
+        }
 
 
+    }
+    public synchronized void AddParts2(City city, Side side) {
+
+        for (Side openSide : side.getCityPart().getOpensides()) {
+            System.out.println();
+             if(openSide.getOppositeSide()!= null) {
+                 city.addOnePart(side, side.getOppositeSide()); //TODO
+                // AddParts2(city, side.getOppositeSide());
+             }
         }
     }
 

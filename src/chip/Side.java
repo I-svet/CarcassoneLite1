@@ -1,9 +1,10 @@
 package chip;
 
-import City.City;
+import City.*;
 import chipMiple.SuperMiple;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Side {
     public enum TypeEdge
@@ -17,11 +18,18 @@ public class Side {
     }
 
     private TypeEdge typeEdge;
-    private Side oppositeSide=null;
-    private  SuperMiple miple = null;
+    private Side oppositeSide;
+    private  SuperMiple miple;
     private boolean connected = false;
-    private ArrayList<Side> connections;
-    private City city=null;
+    //private ArrayList<Side> connections= new ArrayList<>(Arrays.asList(this));
+    private ArrayList<Side> connections= new ArrayList<>();
+    public void setConnections(ArrayList<Side> connections) {
+        this.connections = connections;
+    }
+
+    // private ArrayList<Side> connections= new ArrayList<>();
+    private City city;
+    private CityPart cityPart;
 
     public void setCity(City city) {
         this.city = city;
@@ -34,7 +42,12 @@ public class Side {
 
 
     public void setOppositeSide(Side oppositeSide) {
+
         this.oppositeSide = oppositeSide;
+        if(oppositeSide.getCity()!=null)
+        {
+            oppositeSide.getCity().addOnePart(oppositeSide,this);
+        }
     }
 
     public Side getOppositeSide() {
@@ -63,9 +76,17 @@ public class Side {
 
      public void connect(){connected=true;}
 
-    public Side(final TypeEdge typeEdge,final ArrayList<Side> connections){
+    public void setCityPart(CityPart cityPart) {
+        this.cityPart = cityPart;
+    }
+
+    public CityPart getCityPart() {
+        return cityPart;
+    }
+
+    public Side(final TypeEdge typeEdge, final ArrayList<Side> connections){
         this.typeEdge = typeEdge;
-        this.connections=connections;
+        this.connections.addAll(connections);
     }
     public TypeEdge getTypeEdge(){
         return this.typeEdge;

@@ -165,7 +165,7 @@ public class GamePanel extends JPanel implements Runnable{
                 drawCount++;
             }
            if(timer >= 1000000000){
-               System.out.println(("FPS"+ drawCount));
+              // System.out.println(("FPS"+ drawCount));
                timer=0;
                drawCount=0;
            }
@@ -178,13 +178,14 @@ public class GamePanel extends JPanel implements Runnable{
 
         if (!mH.check) {
             int orientation = keyH.ont;
-            putcard=true;
+
             int xOnMap = ((int) (player.worldX + (mH.x - player.screenX) * 1.0 / player.scale)) / this.tileSize;
             int yOnMap = ((int) (player.worldY + (mH.y - player.screenY) * 1.0 / player.scale)) / this.tileSize;
 
             if (clField.isPointOkey(xOnMap, yOnMap, upCard, orientation)) {
                 game.setCurrentPoint(clField.addCard(xOnMap, yOnMap, upCard, orientation));
                 mH.p = true;
+                putcard=true;
             }
             if (clDeck.isEmpty()) {
                 JLabel message4 = new JLabel("Game is over");
@@ -201,18 +202,21 @@ public class GamePanel extends JPanel implements Runnable{
                 upCard = clDeck.drawCard();
                 mH.p = false;
             } else if ((!mH.check2) && (mH.p)) {
-                putcard=false;
+
+               // keyH.skip = false;
                 int xOnMapCard = ((int) (player.worldX + (mH.x - player.screenX) * 1.0 / player.scale)) / this.tileSize;
                 int yOnMapCard = ((int) (player.worldY + (mH.y - player.screenY) * 1.0 / player.scale)) / this.tileSize;
                 int xOnMapPoint = ((int) (player.worldX + (mH.x - player.screenX) * 1.0 / player.scale)) % this.tileSize;
                 int yOnMapPoint = ((int) (player.worldY + (mH.y - player.screenY) * 1.0 / player.scale)) % this.tileSize;
                 if (game.isItCurrentPoint(clField.getClFieldPoint(xOnMapCard, yOnMapCard))) {
                     if (clField.isMipleOkey(xOnMapCard, yOnMapCard, xOnMapPoint, yOnMapPoint, this)) {
-                        clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this);
+                        clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this,game.players[game.getCurrentPlayerIndex()]);
+
                         game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
                         setPidName(game.changePlayer());
                         upCard = clDeck.drawCard();
                         mH.p = false;
+                        putcard=false;
 
                     }
                 }

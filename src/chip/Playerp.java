@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Playerp {
-    public ArrayList<City> cities;
+    public ArrayList<City> cities = new ArrayList<>();
     public String name;
     public int scor=0;
     ArrayList<SuperMiple> hand;
@@ -40,11 +40,11 @@ public class Playerp {
 
          hand = new ArrayList<SuperMiple>(Arrays.asList(miple));
     }
-    public void finishCity(City city){
+    /*public void finishCity(City city){
         scor+=city.getScor();
         hand.addAll(city.getMiples());
         cities.remove(city);
-    }
+    }*/
     public ArrayList<SuperMiple> getHand(){
         return this.hand;
     }
@@ -52,13 +52,8 @@ public class Playerp {
         cities.add(city);
     }
     public void connectCities(City city1,City city2){
-        ArrayList<CityPart> parts = new ArrayList<>(city1.getSides());
-        ArrayList<CityPart> openParts = new ArrayList<>(city1.getOpenParts());
-        ArrayList<Playerp> players = new ArrayList<>(city1.getNames());
-        parts.addAll(city2.getSides());
-        openParts.addAll(city2.getOpenParts());
-        players.addAll(city2.getNames());
-        City city = new City(parts,openParts,players);
+
+
 
     }
     public void addCity(City city){
