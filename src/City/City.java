@@ -32,7 +32,7 @@ public class City {
        openParts= new ArrayList<>(List.of(part));
        scor += pointOfOnePart;
 
-      // part.sidesAddToCity(this);
+       part.sidesAddToCity(this);
 
 
     }
@@ -66,6 +66,7 @@ public class City {
             newpart = new CityPart(side2, side2.getConnections());
             sides.add(newpart);
             openParts.add(newpart);
+            newpart.sidesAddToCity(this);
             System.out.println("Successfull added" + newpart);
         }
         else newpart=side2.getCityPart();
@@ -112,6 +113,26 @@ public class City {
 
         openParts.addAll(openPartss);
         this.sides.addAll(parts);
+
+    }
+    public synchronized void addParts( Side side) {
+        Iterator<Side> iterator = side.getCityPart().getOpensides().iterator();
+
+        while(iterator.hasNext()){
+            Side siddde = iterator.next();
+            //System.out.println("iteration  "+side.getCityPart()+" "+siddde);
+
+            if(siddde.getOppositeSide()!= null) {
+
+                this.addOnePart(siddde, siddde.getOppositeSide()); //
+                // System.out.println("close " + siddde );
+                iterator.remove();
+
+                addParts( siddde.getOppositeSide());
+            }
+            else System.out.println(siddde.getOppositeSide() +" is null");
+        }
+
 
     }
 

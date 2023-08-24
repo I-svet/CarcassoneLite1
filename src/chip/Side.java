@@ -44,10 +44,18 @@ public class Side {
     public void setOppositeSide(Side oppositeSide) {
 
         this.oppositeSide = oppositeSide;
-        if(oppositeSide.getCity()!=null)
+      //  oppositeSide.setOnlyOppositeSide(this);
+
+        if(oppositeSide.getCity()!=null && this.getCity() ==null)
         {
             oppositeSide.getCity().addOnePart(oppositeSide,this);
+            oppositeSide.getCity().addParts(this);
         }
+    }
+    public void setOnlyOppositeSide(Side oppositeSide) {
+
+        this.oppositeSide = oppositeSide;
+
     }
 
     public Side getOppositeSide() {

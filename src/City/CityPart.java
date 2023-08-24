@@ -23,21 +23,22 @@ Queue<Side> list = new ConcurrentLinkedQueue<>();
     }
     public CityPart(Side side,ArrayList<Side> sides)
     {
-      //   side.setCityPart(this);
-         this.sides = side.getConnections();
-         for(Side sidde: sides){
+        //side.setCityPart(this); // TODO why i cannot delete this
+
+        this.sides = side.getConnections();
+        for(Side sidde: sides){
              sidde.setCityPart(this);
             // System.out.println("setCityPart " +this+ " to the "+ sidde);
          }
          if(sides.isEmpty()) System.out.println("shit sides is empty");
          opensiddes = new ArrayList<>(sides);
     }
-  /*  public void sidesAddToCity(City city){
+    public void sidesAddToCity(City city){
         for(Side side : sides ) {
         side.setCity(city);
-            System.out.println("setCity"+ "to the"+ side);
+          //  System.out.println("setCity"+ "to the"+ side);
         }
-    }*/
+    }
 
 
     public ArrayList<Side> getSides() {
