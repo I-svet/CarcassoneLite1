@@ -2,12 +2,14 @@ package chip;
 
 
 
+import City.City;
 import menu.InvalidPlayerTurnException;
 import menu.InvalidSideEdgeSubmissionException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Game {
     private int currentPlayer;
@@ -15,8 +17,8 @@ public class Game {
 
     private CLFieldPoint currentPoint;
     private CLDeck deck;
-   // private ArrayList<ArrayList<SuperMiple>> playerHand;
-  //  private ArrayList<ArrayList<City>> playerCities;
+
+   // private HashSet<City> finishedCities;
    // private ArrayList<CLCard> stockPile;
 
  //  private CLCard.Type validType;
@@ -41,7 +43,7 @@ public class Game {
     public Game(String[] pids) {
         deck = new CLDeck();
         deck.shuffle();
-
+      //  finishedCities=new HashSet<>();
         playerIds = pids;
         currentPlayer = 0;
         ArrayList<String> colors = new ArrayList<>();
@@ -57,10 +59,19 @@ public class Game {
 
             }
 
-        }
+    }
+   /* public void addToFinishedCities(City city){
+        finishedCities.add(city);
+    }
+    public void isCityFinished(City city){
+        return finishedCities.contains()
+    }*/
 
 
-    public void start(Game game) {
+
+
+
+  //  public void start(Game game) {
       /*  CLCard card = deck.drawCard();
         validType = card.getType();
         validEdA = card.A.getTypeEdge();
@@ -77,7 +88,7 @@ public class Game {
         validC = card.getSideC();
         validD = card.getSideD();
         stockPile.add(card);*/
-    }
+   // }
 
    /* public CLCard getTopCard() {
         return new CLCard(validA, validB, validC, validD, validCenter, validType);
@@ -122,6 +133,7 @@ public class Game {
     public String[] getPlayer(){
         return playerIds;
     }
+
     /*public ArrayList<SuperMiple> getPlayerHand(String pid){
         int index =Arrays.asList(playerIds).indexOf(pid);
         return playerHand.get(index);

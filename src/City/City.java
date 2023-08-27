@@ -18,8 +18,8 @@ public class City {
 
 
     private final int pointOfOnePart=2;
-    boolean open = true;
-     int scor =0;
+
+    private int score =0;
     public City(Side side,Playerp playerp){
 
         ArrayList<Side> arrayOfOneSide = new ArrayList<>(List.of(side));
@@ -30,7 +30,7 @@ public class City {
        //side.setCityPart(part);//?????????????? TODO
        sides = new ArrayList<>(List.of(part));
        openParts= new ArrayList<>(List.of(part));
-       scor += pointOfOnePart;
+       score += pointOfOnePart;
 
        part.sidesAddToCity(this);
 
@@ -59,6 +59,7 @@ public class City {
     public synchronized  void addOnePart(Side side1, Side side2){
         CityPart part1 = side1.getCityPart();
        // part1.closeSide(side1);
+        side1.connect();
         if(part1.isAllSidesConnected()) openParts.remove(part1);
 
         CityPart newpart;
@@ -73,14 +74,21 @@ public class City {
 
 
         newpart.closeSide(side2);
+        System.out.println("close " + side2 );
+
+
         if(newpart.isAllSidesConnected()) openParts.remove(newpart);
-        scor +=pointOfOnePart;
+        score +=pointOfOnePart;
+
+        if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
+            this.finishCity();
+        }
     }
 
 
 
     public int getScor() {
-        return scor;
+        return score;
     }
 
     public HashMap<Playerp, ArrayList<Side>> getSidesWithMiples() {
@@ -125,14 +133,18 @@ public class City {
             if(siddde.getOppositeSide()!= null) {
 
                 this.addOnePart(siddde, siddde.getOppositeSide()); //
-                // System.out.println("close " + siddde );
+
                 iterator.remove();
+                 System.out.println("close " + siddde );
 
                 addParts( siddde.getOppositeSide());
             }
             else System.out.println(siddde.getOppositeSide() +" is null");
         }
-
+        if(side.getCityPart().isAllSidesConnected()) openParts.remove(side.getCityPart());
+        if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
+            this.finishCity();
+        }
 
     }
 
@@ -148,8 +160,44 @@ public class City {
 
 
 
-    public boolean isOpen(){
+    public boolean isFinished(){
+
+
         return openParts.isEmpty();
+    }
+    public void finishCity()
+    {
+        if(openParts.isEmpty()) {
+            int maxMiple = 1;
+            for (ArrayList<Side> sides : sidesWithMiples.values()) {
+                if (sides.size() >= maxMiple) {
+                    maxMiple = sides.size();
+                }
+            }
+            for (Playerp playerp : sidesWithMiples.keySet()) {
+                if (sidesWithMiples.get(playerp).size() == maxMiple) {
+                    playerp.addPointsCity(score);
+                   System.out.println( playerp.getScore());
+                    playerp.removeCity(this);
+                    for(Side side:sidesWithMiples.get(playerp) ){
+                        playerp.addMiple(side.getMiple());
+                        side.removeMiple();
+                    }
+                }
+                else {
+
+                    playerp.removeCity(this);
+                    for(Side side:sidesWithMiples.get(playerp) ){
+                        playerp.addMiple(side.getMiple());
+                        side.removeMiple();
+                    }
+                }
+            }
+            System.out.println("city is finished");
+            sidesWithMiples.clear();
+
+        }
+        else System.out.println("city is not finished");
     }
 
 

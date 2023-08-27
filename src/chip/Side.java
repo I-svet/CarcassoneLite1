@@ -20,6 +20,8 @@ public class Side {
     private TypeEdge typeEdge;
     private Side oppositeSide;
     private  SuperMiple miple;
+    private City city;
+    private CityPart cityPart;
     private boolean connected = false;
     //private ArrayList<Side> connections= new ArrayList<>(Arrays.asList(this));
     private ArrayList<Side> connections= new ArrayList<>();
@@ -27,9 +29,9 @@ public class Side {
         this.connections = connections;
     }
 
-    // private ArrayList<Side> connections= new ArrayList<>();
-    private City city;
-    private CityPart cityPart;
+    public void removeMiple(){
+        miple = null;
+    }
 
     public void setCity(City city) {
         this.city = city;
@@ -44,12 +46,21 @@ public class Side {
     public void setOppositeSide(Side oppositeSide) {
 
         this.oppositeSide = oppositeSide;
-      //  oppositeSide.setOnlyOppositeSide(this);
+        oppositeSide.setOnlyOppositeSide(this);
 
         if(oppositeSide.getCity()!=null && this.getCity() ==null)
         {
             oppositeSide.getCity().addOnePart(oppositeSide,this);
-            oppositeSide.getCity().addParts(this);
+            CityPart part1 = oppositeSide.getCityPart();
+             part1.closeSide(oppositeSide);
+
+            if(part1.isAllSidesConnected()) this.getCity().getOpenParts().remove(part1);
+            System.out.println("close " + oppositeSide );
+
+            this.getCity().addParts(this);
+            if(oppositeSide.getCity().isFinished()){
+                oppositeSide.getCity().finishCity();
+            }
         }
     }
     public void setOnlyOppositeSide(Side oppositeSide) {

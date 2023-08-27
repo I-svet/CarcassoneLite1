@@ -186,7 +186,7 @@ public class CLCard {
         this.getA().setConnections(new ArrayList<>(Arrays.asList(getA(), getC())));
         this.getB().setConnections(new ArrayList<>(Collections.singletonList(getB())));
         this.getC().setConnections(new ArrayList<>(Arrays.asList(getA(), getC())));
-        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getC())));
+        this.getD().setConnections(new ArrayList<>(Collections.singletonList(getD())));
         this.setType(Type.City4);
         this.setCenter(null);
         this.getSideM()[0]= this.getA();

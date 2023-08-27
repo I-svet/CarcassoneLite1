@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Playerp {
-    public ArrayList<City> cities = new ArrayList<>();
-    public String name;
-    public int scor=0;
-    ArrayList<SuperMiple> hand;
+    private ArrayList<City> cities ;
+    private String name;
+    private int score=0;
+
+    private ArrayList<SuperMiple> hand;
     public Playerp(String nameIds, String namecolor ){
         this.name=nameIds;
+        cities = new ArrayList<>();
         setHand(namecolor);
 
     }
@@ -48,21 +50,29 @@ public class Playerp {
     public ArrayList<SuperMiple> getHand(){
         return this.hand;
     }
-    public void newcity(City city){
-        cities.add(city);
-    }
-    public void connectCities(City city1,City city2){
 
 
-
-    }
     public void addCity(City city){
         cities.add(city);
     }
-    public void addPointsCity(){
-        // TODO add function
+    public void addPointsCity(int score){
+        this.score+=score;
 
     }
+    public void addMiple(ArrayList<SuperMiple> miples){
+        hand.addAll(miples);
+    }
+    public void addMiple(SuperMiple miple){
+        hand.add(miple);
+    }
+    public void removeCity(City city){
+        cities.remove(city);
+    }
+    public int getScore()
+    {
+        return score;
+    }
+
 
 
 

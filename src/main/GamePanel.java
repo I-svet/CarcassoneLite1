@@ -66,7 +66,6 @@ public class GamePanel extends JPanel implements Runnable{
         temp=playerIds;
         pids=temp.toArray(new String[temp.size()]);
         game=new Game(pids);
-           game.start(game);
            setPidName(game);
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
