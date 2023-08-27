@@ -9,30 +9,31 @@ import entity.Player;
 
 import java.util.*;
 
-public class City {
+public class City extends  Infrastructure implements Finishing{
 
-    ArrayList<CityPart> sides ;
-    ArrayList<CityPart> openParts;
+   // ArrayList<InfrastructurePart> sides ;
+  //  ArrayList<InfrastructurePart> openParts;
 
-   private HashMap<Playerp,ArrayList<Side>> sidesWithMiples;
+  // private HashMap<Playerp,ArrayList<Side>> sidesWithMiples;
 
 
-    private final int pointOfOnePart=2;
 
-    private int score =0;
+
+   // private int score =0;
     public City(Side side,Playerp playerp){
+        pointOfOnePart=2;
 
         ArrayList<Side> arrayOfOneSide = new ArrayList<>(List.of(side));
         sidesWithMiples = new HashMap<>();
         sidesWithMiples.put(playerp,arrayOfOneSide);
 
-       CityPart part = new CityPart( side, side.getConnections());
+        InfrastructurePart part = new CityPart( side, side.getConnections());
        //side.setCityPart(part);//?????????????? TODO
        sides = new ArrayList<>(List.of(part));
        openParts= new ArrayList<>(List.of(part));
        score += pointOfOnePart;
 
-       part.sidesAddToCity(this);
+       part.sidesAddToInfrastructure(this);
 
 
     }
@@ -55,22 +56,23 @@ public class City {
         scor +=pointOfOnePart;
 
     }*/
+@Override
 
     public synchronized  void addOnePart(Side side1, Side side2){
-        CityPart part1 = side1.getCityPart();
+    InfrastructurePart part1 = side1.getInfrastructurePart();
        // part1.closeSide(side1);
         side1.connect();
         if(part1.isAllSidesConnected()) openParts.remove(part1);
 
-        CityPart newpart;
-        if(side2.getCityPart()==null){
+    InfrastructurePart newpart;
+        if(side2.getInfrastructurePart()==null){
             newpart = new CityPart(side2, side2.getConnections());
             sides.add(newpart);
             openParts.add(newpart);
-            newpart.sidesAddToCity(this);
+            newpart.sidesAddToInfrastructure(this);
             System.out.println("Successfull added" + newpart);
         }
-        else newpart=side2.getCityPart();
+        else newpart=side2.getInfrastructurePart();
 
 
         newpart.closeSide(side2);
@@ -81,7 +83,7 @@ public class City {
         score +=pointOfOnePart;
 
         if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
-            this.finishCity();
+            this.finishInfrastructure();
         }
     }
 
@@ -96,10 +98,10 @@ public class City {
     }
 
     public City(City city1, Side side1, City city2,  Side side2){
-        CityPart part1= side1.getCityPart();
+        InfrastructurePart part1= side1.getInfrastructurePart();
         part1.closeSide(side1);
         if(part1.isAllSidesConnected()) city1.getOpenParts().remove(part1);
-        CityPart part2=side2.getCityPart();
+        InfrastructurePart part2=side2.getInfrastructurePart();
         part2.closeSide(side2);
         if(part2.isAllSidesConnected()) city2.getOpenParts().remove(part1);
      sides.addAll(city1.getSides());
@@ -113,18 +115,16 @@ public class City {
          }
          sidesWithMiples.get(playerInCity2).addAll(city2.getSidesWithMiples().get(playerInCity2));
      }
-
-
-
     }
-    public City(ArrayList<CityPart> parts, ArrayList<CityPart> openPartss, ArrayList<Playerp> playerss){
+    public City(ArrayList<InfrastructurePart> parts, ArrayList<InfrastructurePart> openPartss, ArrayList<Playerp> playerss){
 
         openParts.addAll(openPartss);
         this.sides.addAll(parts);
 
     }
+    @Override
     public synchronized void addParts( Side side) {
-        Iterator<Side> iterator = side.getCityPart().getOpensides().iterator();
+        Iterator<Side> iterator = side.getInfrastructurePart().getOpensides().iterator();
 
         while(iterator.hasNext()){
             Side siddde = iterator.next();
@@ -141,31 +141,32 @@ public class City {
             }
             else System.out.println(siddde.getOppositeSide() +" is null");
         }
-        if(side.getCityPart().isAllSidesConnected()) openParts.remove(side.getCityPart());
+        if(side.getInfrastructurePart().isAllSidesConnected()) openParts.remove(side.getInfrastructurePart());
         if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
-            this.finishCity();
+            this.finishInfrastructure();
         }
 
     }
 
 
     
-    public ArrayList<CityPart> getSides(){
+    public ArrayList<InfrastructurePart> getSides(){
         return this.sides;
     }
-    public ArrayList<CityPart> getOpenParts(){
+    public ArrayList<InfrastructurePart> getOpenParts(){
         return this.openParts;
     }
 
 
 
-
+    @Override
     public boolean isFinished(){
 
 
         return openParts.isEmpty();
     }
-    public void finishCity()
+    @Override
+    public void finishInfrastructure()
     {
         if(openParts.isEmpty()) {
             int maxMiple = 1;
@@ -176,9 +177,9 @@ public class City {
             }
             for (Playerp playerp : sidesWithMiples.keySet()) {
                 if (sidesWithMiples.get(playerp).size() == maxMiple) {
-                    playerp.addPointsCity(score);
+                    playerp.addPointsInfrastructure(score);
                    System.out.println( playerp.getScore());
-                    playerp.removeCity(this);
+                    playerp.removeInfrastructure(this);
                     for(Side side:sidesWithMiples.get(playerp) ){
                         playerp.addMiple(side.getMiple());
                         side.removeMiple();
@@ -186,7 +187,7 @@ public class City {
                 }
                 else {
 
-                    playerp.removeCity(this);
+                    playerp.removeInfrastructure(this);
                     for(Side side:sidesWithMiples.get(playerp) ){
                         playerp.addMiple(side.getMiple());
                         side.removeMiple();

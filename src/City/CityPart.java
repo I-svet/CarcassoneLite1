@@ -12,11 +12,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class CityPart {
-ArrayList<Side> sides;
-ArrayList<Side> opensiddes;
-Set<Side> set =  new ConcurrentSkipListSet<>();
-Queue<Side> list = new ConcurrentLinkedQueue<>();
+public class CityPart extends InfrastructurePart {
+//ArrayList<Side> sides;
+//ArrayList<Side> opensiddes;
+//Set<Side> set =  new ConcurrentSkipListSet<>();
+//Queue<Side> list = new ConcurrentLinkedQueue<>();
 
     public ArrayList<Side> getOpensides() {
         return opensiddes;
@@ -28,15 +28,15 @@ Queue<Side> list = new ConcurrentLinkedQueue<>();
         this.sides = side.getConnections();
         opensiddes = new ArrayList<>(this.sides);
         for(Side sidde: sides){
-             sidde.setCityPart(this);
+             sidde.setInfrastructurePart(this);
             // System.out.println("setCityPart " +this+ " to the "+ sidde);
          }
          if(sides.isEmpty()) System.out.println("shit sides is empty");
 
     }
-    public void sidesAddToCity(City city){
+    public void sidesAddToInfrastructure(City city){
         for(Side side : sides ) {
-        side.setCity(city);
+        side.setInfrastructure(city);
             System.out.println("setCity"+ "to the"+ side);
         }
     }

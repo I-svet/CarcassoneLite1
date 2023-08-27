@@ -1,7 +1,7 @@
 package chip;
 
 
-import City.City;
+import City.*;
 import City.CityPart;
 import chipMiple.SuperMiple;
 import main.GamePanel;
@@ -266,11 +266,11 @@ public class CLField {
             if (x0 > a / 3) {
                 if (x0 <= 2 * a / 3) {
                     if (y0 < a / 3) {
-                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(4 - ont1) % 4].getCity() == null;
+                        t = points[x][y].card.getSideM()[(4 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(4 - ont1) % 4].getInfrastructure() == null;
 
                     } else {
                         if (y0 > 2 * a / 3) {
-                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(6 - ont1) % 4].getCity() == null;
+                            t = points[x][y].card.getSideM()[(6 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(6 - ont1) % 4].getInfrastructure() == null;
                         } else {
                             if(points[x][y].card.getCenter() != null)
                             t = points[x][y].card.getCenter().miple == null;
@@ -278,13 +278,13 @@ public class CLField {
                     }
                 } else {
                     if (b) {
-                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(5 - ont1) % 4].getCity() == null;
+                        t = points[x][y].card.getSideM()[(5 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(5 - ont1) % 4].getInfrastructure() == null;
                     }
                 }
 
             } else {
                 if (b) {
-                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(7 - ont1) % 4].getCity() == null;
+                    t = points[x][y].card.getSideM()[(7 - ont1) % 4].getMiple() == null && points[x][y].card.getSideM()[(7 - ont1) % 4].getInfrastructure() == null;
 
                 }
             }
@@ -304,8 +304,8 @@ public class CLField {
                if(y0<a/3){
                    points[x][y].card.getSideM()[(4-ont1)%4].setMiple(miple);
                    if(points[x][y].card.getSideM()[(4-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
-                       City newCity = new City(points[x][y].card.getSideM()[(4-ont1)%4],player);
-                       player.addCity(newCity);
+                       Infrastructure newCity = new City(points[x][y].card.getSideM()[(4-ont1)%4],player);
+                       player.addInfrastructure(newCity);
                        newCity.addParts(points[x][y].card.getSideM()[(4-ont1)%4]);
                    }
                }
@@ -313,8 +313,8 @@ public class CLField {
                    if(y0>2*a/3){
                        points[x][y].card.getSideM()[(6-ont1)%4].setMiple(miple);
                        if(points[x][y].card.getSideM()[(6-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
-                           City newCity = new City(points[x][y].card.getSideM()[(6 - ont1) % 4], player);
-                           player.addCity(newCity);
+                           Infrastructure newCity = new City(points[x][y].card.getSideM()[(6 - ont1) % 4], player);
+                           player.addInfrastructure(newCity);
                            newCity.addParts(points[x][y].card.getSideM()[(6-ont1)%4]);
                        }
                    }
@@ -330,8 +330,8 @@ if(points[x][y].card.getCenter() !=null){
                {
                    points[x][y].card.getSideM()[(5-ont1)%4].setMiple(miple);
                    if(points[x][y].card.getSideM()[(5-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
-                       City newCity = new City(points[x][y].card.getSideM()[(5 - ont1) % 4], player);
-                       player.addCity(newCity);
+                       Infrastructure newCity = new City(points[x][y].card.getSideM()[(5 - ont1) % 4], player);
+                       player.addInfrastructure(newCity);
                        newCity.addParts(points[x][y].card.getSideM()[(5-ont1)%4]);
                    }
                }
@@ -343,8 +343,8 @@ if(points[x][y].card.getCenter() !=null){
             {
                 points[x][y].card.getSideM()[(7-ont1)%4].setMiple(miple);
                 if(points[x][y].card.getSideM()[(7-ont1)%4].getTypeEdge()== Side.TypeEdge.City) {
-                    City newCity = new City(points[x][y].card.getSideM()[(7 - ont1) % 4], player);
-                    player.addCity(newCity);
+                    Infrastructure newCity = new City(points[x][y].card.getSideM()[(7 - ont1) % 4], player);
+                    player.addInfrastructure(newCity);
                     newCity.addParts(points[x][y].card.getSideM()[(7-ont1)%4]);
                 }
             }
@@ -413,16 +413,7 @@ if(points[x][y].card.getCenter() !=null){
 
     }
 
-    public synchronized void AddParts2(City city, Side side) {
 
-        for (Side openSide : side.getCityPart().getOpensides()) {
-            System.out.println();
-             if(openSide.getOppositeSide()!= null) {
-                 city.addOnePart(side, side.getOppositeSide()); //
-                // AddParts2(city, side.getOppositeSide());
-             }
-        }
-    }
 
 }
 

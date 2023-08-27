@@ -1,6 +1,6 @@
 package chip;
 
-import City.City;
+import City.*;
 import City.CityPart;
 import chipMiple.SuperMiple;
 import entity.Player;
@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Playerp {
-    private ArrayList<City> cities ;
+    private ArrayList<Infrastructure> infrastructures ;
     private String name;
     private int score=0;
 
     private ArrayList<SuperMiple> hand;
     public Playerp(String nameIds, String namecolor ){
         this.name=nameIds;
-        cities = new ArrayList<>();
+        infrastructures = new ArrayList<>();
         setHand(namecolor);
 
     }
@@ -52,10 +52,10 @@ public class Playerp {
     }
 
 
-    public void addCity(City city){
-        cities.add(city);
+    public void addInfrastructure(Infrastructure infrastructure){
+        infrastructures.add(infrastructure);
     }
-    public void addPointsCity(int score){
+    public void addPointsInfrastructure(int score){
         this.score+=score;
 
     }
@@ -65,8 +65,8 @@ public class Playerp {
     public void addMiple(SuperMiple miple){
         hand.add(miple);
     }
-    public void removeCity(City city){
-        cities.remove(city);
+    public void removeInfrastructure(Infrastructure infrastructure){
+        infrastructures.remove(infrastructure);
     }
     public int getScore()
     {

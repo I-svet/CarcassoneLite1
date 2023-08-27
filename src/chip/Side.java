@@ -20,8 +20,8 @@ public class Side {
     private TypeEdge typeEdge;
     private Side oppositeSide;
     private  SuperMiple miple;
-    private City city;
-    private CityPart cityPart;
+    private Infrastructure infrastructure;
+    private InfrastructurePart infrastructurePart;
     private boolean connected = false;
     //private ArrayList<Side> connections= new ArrayList<>(Arrays.asList(this));
     private ArrayList<Side> connections= new ArrayList<>();
@@ -33,12 +33,12 @@ public class Side {
         miple = null;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setInfrastructure(Infrastructure infrastructure) {
+        this.infrastructure = infrastructure;
     }
 
-    public City getCity() {
-        return city;
+    public Infrastructure getInfrastructure() {
+        return infrastructure;
     }
 
 
@@ -48,18 +48,18 @@ public class Side {
         this.oppositeSide = oppositeSide;
         oppositeSide.setOnlyOppositeSide(this);
 
-        if(oppositeSide.getCity()!=null && this.getCity() ==null)
+        if(oppositeSide.getInfrastructure()!=null && this.getInfrastructure() ==null)
         {
-            oppositeSide.getCity().addOnePart(oppositeSide,this);
-            CityPart part1 = oppositeSide.getCityPart();
+            oppositeSide.getInfrastructure().addOnePart(oppositeSide,this);
+            InfrastructurePart part1 = oppositeSide.getInfrastructurePart();
              part1.closeSide(oppositeSide);
 
-            if(part1.isAllSidesConnected()) this.getCity().getOpenParts().remove(part1);
+            if(part1.isAllSidesConnected()) this.getInfrastructure().getOpenParts().remove(part1);
             System.out.println("close " + oppositeSide );
 
-            this.getCity().addParts(this);
-            if(oppositeSide.getCity().isFinished()){
-                oppositeSide.getCity().finishCity();
+            this.getInfrastructure().addParts(this);
+            if(oppositeSide.getInfrastructure().isFinished()){
+                oppositeSide.getInfrastructure().finishInfrastructure();
             }
         }
     }
@@ -95,12 +95,12 @@ public class Side {
 
      public void connect(){connected=true;}
 
-    public void setCityPart(CityPart cityPart) {
-        this.cityPart = cityPart;
+    public void setInfrastructurePart(InfrastructurePart infrastructurePart) {
+        this.infrastructurePart = infrastructurePart;
     }
 
-    public CityPart getCityPart() {
-        return cityPart;
+    public InfrastructurePart getInfrastructurePart() {
+        return infrastructurePart;
     }
 
     public Side(final TypeEdge typeEdge, final ArrayList<Side> connections){
