@@ -307,6 +307,11 @@ public class CLField {
                        Infrastructure newCity = new City(points[x][y].card.getSideM()[(4-ont1)%4],player);
                        player.addInfrastructure(newCity);
                        newCity.addParts(points[x][y].card.getSideM()[(4-ont1)%4]);
+                   }else
+                   if(points[x][y].card.getSideM()[(4-ont1)%4].getTypeEdge()== Side.TypeEdge.road) {
+                       Infrastructure newRoad = new Road(points[x][y].card.getSideM()[(4-ont1)%4],player);
+                       player.addInfrastructure(newRoad);
+                       newRoad.addParts(points[x][y].card.getSideM()[(4-ont1)%4]);
                    }
                }
                else{
@@ -316,6 +321,11 @@ public class CLField {
                            Infrastructure newCity = new City(points[x][y].card.getSideM()[(6 - ont1) % 4], player);
                            player.addInfrastructure(newCity);
                            newCity.addParts(points[x][y].card.getSideM()[(6-ont1)%4]);
+                       }else
+                       if(points[x][y].card.getSideM()[(6-ont1)%4].getTypeEdge()== Side.TypeEdge.road) {
+                           Infrastructure newRoad = new Road(points[x][y].card.getSideM()[(6-ont1)%4],player);
+                           player.addInfrastructure(newRoad);
+                           newRoad.addParts(points[x][y].card.getSideM()[(6-ont1)%4]);
                        }
                    }
                    else{
@@ -334,6 +344,11 @@ if(points[x][y].card.getCenter() !=null){
                        player.addInfrastructure(newCity);
                        newCity.addParts(points[x][y].card.getSideM()[(5-ont1)%4]);
                    }
+                   if(points[x][y].card.getSideM()[(5-ont1)%4].getTypeEdge()== Side.TypeEdge.road) {
+                       Infrastructure newRoad = new Road(points[x][y].card.getSideM()[(5-ont1)%4],player);
+                       player.addInfrastructure(newRoad);
+                       newRoad.addParts(points[x][y].card.getSideM()[(5-ont1)%4]);
+                   }
                }
            }
 
@@ -346,6 +361,11 @@ if(points[x][y].card.getCenter() !=null){
                     Infrastructure newCity = new City(points[x][y].card.getSideM()[(7 - ont1) % 4], player);
                     player.addInfrastructure(newCity);
                     newCity.addParts(points[x][y].card.getSideM()[(7-ont1)%4]);
+                }
+                if(points[x][y].card.getSideM()[(7-ont1)%4].getTypeEdge()== Side.TypeEdge.road) {
+                    Infrastructure newRoad = new Road(points[x][y].card.getSideM()[(7-ont1)%4],player);
+                    player.addInfrastructure(newRoad);
+                    newRoad.addParts(points[x][y].card.getSideM()[(7-ont1)%4]);
                 }
             }
         }

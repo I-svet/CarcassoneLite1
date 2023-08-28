@@ -17,13 +17,16 @@ public abstract class InfrastructurePart {
         return opensiddes;
     }
 
-    public void sidesAddToInfrastructure(Infrastructure infrastructure){
+  /*  public  void sidesAddToInfrastructure(Infrastructure infrastructure);
+    {
         for(Side side : sides ) {
             side.setInfrastructure(infrastructure);
             System.out.println("setCity"+ "to the"+ side);
         }
-    }
+    }*/
 
+
+    public abstract void sidesAddToInfrastructure(Infrastructure infrastructure);
 
     public ArrayList<Side> getSides() {
         return sides;
