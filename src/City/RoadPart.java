@@ -1,5 +1,6 @@
 package City;
 
+import chip.CLFieldPoint;
 import chip.Side;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class RoadPart extends InfrastructurePart {
 
 
 
-    public RoadPart(Side side,ArrayList<Side> sides)
+    public RoadPart(Side side, ArrayList<Side> sides)
     {
         //side.setCityPart(this); // TODO why i cannot delete this
 

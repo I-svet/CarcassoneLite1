@@ -88,10 +88,9 @@ public class CLFieldPoint {
         rightSide = sides.get((orientation + 3) % 4);
         downSide = sides.get((orientation + 2) % 4);
         leftSide = sides.get((orientation + 1) % 4);
-        /*oppositeSides.put(upSide,null);
-        oppositeSides.put(downSide,null);
-        oppositeSides.put(rightSide,null);
-        oppositeSides.put(leftSide,null);*/
+        for(Side side: sides){
+            side.setPoint(this);
+        }
     }
     public CLCard getCard(){
         return this.card;

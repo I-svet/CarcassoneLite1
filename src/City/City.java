@@ -21,6 +21,7 @@ public class City extends  Infrastructure implements Finishing{
 
    // private int score =0;
     public City(Side side,Playerp playerp){
+
         pointOfOnePart=2;
 
         ArrayList<Side> arrayOfOneSide = new ArrayList<>(List.of(side));

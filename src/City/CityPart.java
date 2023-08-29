@@ -1,5 +1,6 @@
 package City;
 
+import chip.CLFieldPoint;
 import chip.Side;
 
 import java.util.ArrayList;

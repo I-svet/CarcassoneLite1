@@ -18,7 +18,18 @@ public class Side {
     }
 
     private TypeEdge typeEdge;
+
+    public void setPoint(CLFieldPoint point) {
+        this.point = point;
+    }
+
     private Side oppositeSide;
+    private CLFieldPoint point;
+
+    public CLFieldPoint getPoint() {
+        return point;
+    }
+
     private  SuperMiple miple;
     private Infrastructure infrastructure;
     private InfrastructurePart infrastructurePart;

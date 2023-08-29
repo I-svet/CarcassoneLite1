@@ -233,6 +233,7 @@ public class CLField {
     public CLFieldPoint addCard(int x, int y, CLCard card, int orientation){
         points[x][y] = new CLFieldPoint(card, orientation);
         if (points[x - 1][y] != null) {
+
             points[x][y].getLeftSide().setOppositeSide(points[x - 1][y].getRightSide());
             points[x-1][y].getRightSide().setOppositeSide(points[x][y].getLeftSide()); //TODO i should remade this
 

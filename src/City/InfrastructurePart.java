@@ -13,6 +13,7 @@ public abstract class InfrastructurePart {
     ArrayList<Side> opensiddes;
 
 
+
     public ArrayList<Side> getOpensides() {
         return opensiddes;
     }

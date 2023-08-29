@@ -16,7 +16,7 @@ public class Road extends Infrastructure{
     sidesWithMiples = new HashMap<>();
     sidesWithMiples.put(playerp,arrayOfOneSide);
 
-    InfrastructurePart part = new CityPart( side, side.getConnections());
+    InfrastructurePart part = new RoadPart( side, side.getConnections());
     //side.setCityPart(part);//?????????????? TODO
     sides = new ArrayList<>(List.of(part));
     openParts= new ArrayList<>(List.of(part));
