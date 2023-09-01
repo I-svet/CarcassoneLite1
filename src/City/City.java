@@ -9,16 +9,12 @@ import entity.Player;
 
 import java.util.*;
 
-public class City extends  Infrastructure implements Finishing{
+public class City extends  Infrastructure {
 
    // ArrayList<InfrastructurePart> sides ;
   //  ArrayList<InfrastructurePart> openParts;
 
   // private HashMap<Playerp,ArrayList<Side>> sidesWithMiples;
-
-
-
-
    // private int score =0;
     public City(Side side,Playerp playerp){
 
@@ -33,7 +29,7 @@ public class City extends  Infrastructure implements Finishing{
        sides = new ArrayList<>(List.of(part));
        openParts= new ArrayList<>(List.of(part));
        score += pointOfOnePart;
-
+        side.getFieldPoint().addInfrastructure(side.getInfrastructure());
        part.sidesAddToInfrastructure(this);
 
 
@@ -72,6 +68,11 @@ public class City extends  Infrastructure implements Finishing{
             openParts.add(newpart);
             newpart.sidesAddToInfrastructure(this);
             System.out.println("Successfull added" + newpart);
+
+            if(!side2.getFieldPoint().getInfrastructure().contains(this)) {
+                score +=pointOfOnePart;
+                side2.getFieldPoint().addInfrastructure(side2.getInfrastructure());
+            }
         }
         else newpart=side2.getInfrastructurePart();
 
@@ -81,7 +82,8 @@ public class City extends  Infrastructure implements Finishing{
 
 
         if(newpart.isAllSidesConnected()) openParts.remove(newpart);
-        score +=pointOfOnePart;
+
+
 
         if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
             this.finishInfrastructure();
@@ -138,7 +140,7 @@ public class City extends  Infrastructure implements Finishing{
                 iterator.remove();
                  System.out.println("close " + siddde );
 
-                addParts( siddde.getOppositeSide());
+                addParts(siddde.getOppositeSide());
             }
             else System.out.println(siddde.getOppositeSide() +" is null");
         }

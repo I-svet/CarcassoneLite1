@@ -69,6 +69,9 @@ public class TileManager{
     public void draw(Graphics2D g2) {
 
         int worldCol = (int) (gp.getPlayer().worldX - gp.getPlayer().screenX * 1.0 / gp.getPlayer().scale - gp.tileSize) / gp.tileSize + 1;
+
+        int worldColll = (int) (gp.getPlayer().worldX - gp.getPlayer().screenX * 1.0 / gp.getPlayer().scale - gp.tileSize) / gp.tileSize + 1;
+
         if(worldCol<0) worldCol=0;
         int worldColl = (int) (gp.getPlayer().worldX - gp.getPlayer().screenX * 1.0 / gp.getPlayer().scale - gp.tileSize) / gp.tileSize + 1;
         if(worldColl<0) worldCol=0;
@@ -115,6 +118,7 @@ public class TileManager{
 
             g2.drawImage(image, screenX, screenY, (int) ((int) gp.tileSize * gp.getPlayer().scale), (int) (gp.tileSize * gp.getPlayer().scale), null);
            // offgc.drawImage(tile[tileNum].image, screenX, screenY, (int) ((int) gp.tileSize * gp.getPlayer().scale), (int) (gp.tileSize * gp.getPlayer().scale), null);
+          //  if(worldCol==(worldCol2-worldCol)/2+worldColll) thread.sleep(1);
             worldCol++;
             if (worldCol == worldCol2) {
                 worldCol = worldColl;

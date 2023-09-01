@@ -1,5 +1,6 @@
 package City;
 
+import chip.CLFieldPoint;
 import chip.Side;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 public abstract class InfrastructurePart {
     ArrayList<Side> sides;
     ArrayList<Side> opensiddes;
+    CLFieldPoint fieldPoint;
 
 
 

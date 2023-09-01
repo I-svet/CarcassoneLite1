@@ -1,5 +1,6 @@
 package chip;
 
+import City.*;
 import main.GamePanel;
 
 import java.awt.*;
@@ -24,15 +25,32 @@ public class CLFieldPoint {
         }
     }
 
-     CLCard card;
+
+
+    CLCard card;
      Side upSide;
      Side downSide;
      Side leftSide;
      Side rightSide;
-
+    ArrayList<Infrastructure> infrastructure;
      Orientation ont;
+
+
+
+
    //  HashMap<Side,Side> oppositeSides;
     int orientation;
+    public void setInfrastructure(ArrayList<Infrastructure> infrastructure) {
+        this.infrastructure = infrastructure;
+    }
+    public void addInfrastructure(Infrastructure part){
+        infrastructure.add(part);
+    }
+
+
+    public ArrayList<Infrastructure> getInfrastructure() {
+        return infrastructure;
+    }
 
     public void drawMiple(int screenX,int screenY, Graphics2D g2,GamePanel gp){
         int ont1=orientation;
@@ -91,6 +109,7 @@ public class CLFieldPoint {
         for(Side side: sides){
             side.setPoint(this);
         }
+        infrastructure= new ArrayList<>();
     }
     public CLCard getCard(){
         return this.card;

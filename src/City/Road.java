@@ -20,9 +20,11 @@ public class Road extends Infrastructure{
     //side.setCityPart(part);//?????????????? TODO
     sides = new ArrayList<>(List.of(part));
     openParts= new ArrayList<>(List.of(part));
-    score += pointOfOnePart;
+
 
     part.sidesAddToInfrastructure(this);
+        side.getFieldPoint().addInfrastructure(side.getInfrastructure());
+        score += pointOfOnePart;
 
 
 }
@@ -60,6 +62,10 @@ public class Road extends Infrastructure{
             openParts.add(newpart);
             newpart.sidesAddToInfrastructure(this);
             System.out.println("Successfull added" + newpart);
+            if(!side2.getFieldPoint().getInfrastructure().contains(this)) {
+                score +=pointOfOnePart;
+                side2.getFieldPoint().addInfrastructure(side2.getInfrastructure());
+            }
         }
         else newpart=side2.getInfrastructurePart();
 
@@ -69,7 +75,7 @@ public class Road extends Infrastructure{
 
 
         if(newpart.isAllSidesConnected()) openParts.remove(newpart);
-        score +=pointOfOnePart;
+
 
         if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
             this.finishInfrastructure();

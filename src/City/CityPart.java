@@ -24,6 +24,7 @@ public class CityPart extends InfrastructurePart {
              sidde.setInfrastructurePart(this);
             // System.out.println("setCityPart " +this+ " to the "+ sidde);
          }
+
          if(sides.isEmpty()) System.out.println("shit sides is empty");
 
     }

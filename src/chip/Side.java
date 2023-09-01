@@ -20,14 +20,18 @@ public class Side {
     private TypeEdge typeEdge;
 
     public void setPoint(CLFieldPoint point) {
-        this.point = point;
+        this.fieldPoint = point;
     }
 
     private Side oppositeSide;
-    private CLFieldPoint point;
+    private CLFieldPoint fieldPoint;
+
+    public CLFieldPoint getFieldPoint() {
+        return fieldPoint;
+    }
 
     public CLFieldPoint getPoint() {
-        return point;
+        return fieldPoint;
     }
 
     private  SuperMiple miple;
