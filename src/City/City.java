@@ -28,10 +28,10 @@ public class City extends  Infrastructure {
        //side.setCityPart(part);//?????????????? TODO
        sides = new ArrayList<>(List.of(part));
        openParts= new ArrayList<>(List.of(part));
-       score += pointOfOnePart;
-        side.getFieldPoint().addInfrastructure(side.getInfrastructure());
-       part.sidesAddToInfrastructure(this);
 
+       part.sidesAddToInfrastructure(this);
+        score += pointOfOnePart;
+        side.getFieldPoint().addInfrastructure(side.getInfrastructure());
 
     }
 //synchronized
