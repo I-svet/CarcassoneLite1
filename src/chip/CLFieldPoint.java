@@ -40,6 +40,9 @@ public class CLFieldPoint {
 
    //  HashMap<Side,Side> oppositeSides;
     int orientation;
+    public void removeInfrastructure(Infrastructure infrastructure){
+    this.infrastructure.remove(infrastructure);
+    }
     public void setInfrastructure(ArrayList<Infrastructure> infrastructure) {
         this.infrastructure = infrastructure;
     }

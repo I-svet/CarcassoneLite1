@@ -67,7 +67,7 @@ public class City extends  Infrastructure {
             sides.add(newpart);
             openParts.add(newpart);
             newpart.sidesAddToInfrastructure(this);
-            System.out.println("Successfull added" + newpart);
+            System.out.println("Successfull added" + newpart+"with sides"+side2.getConnections());
 
             if(!side2.getFieldPoint().getInfrastructure().contains(this)) {
                 score +=pointOfOnePart;
@@ -100,24 +100,58 @@ public class City extends  Infrastructure {
         return sidesWithMiples;
     }
 
-    public City(City city1, Side side1, City city2,  Side side2){
+    public void connectInfrastructure( Side side1, Infrastructure city2,  Side side2){
         InfrastructurePart part1= side1.getInfrastructurePart();
         part1.closeSide(side1);
-        if(part1.isAllSidesConnected()) city1.getOpenParts().remove(part1);
+        System.out.println("close " + side1 +"of the part"+ part1);
+
+        if(part1.isAllSidesConnected()) this.getOpenParts().remove(part1);
+
         InfrastructurePart part2=side2.getInfrastructurePart();
         part2.closeSide(side2);
-        if(part2.isAllSidesConnected()) city2.getOpenParts().remove(part1);
-     sides.addAll(city1.getSides());
-     sides.addAll(city2.getSides());
-     openParts.addAll(city1.getOpenParts());
-     openParts.addAll(city2.getOpenParts());
-     sidesWithMiples.putAll(city1.getSidesWithMiples());
-     for(Playerp playerInCity2 : city2.getSidesWithMiples().keySet()){
-         if(!sidesWithMiples.containsKey(playerInCity2)){
-             sidesWithMiples.put(playerInCity2,new ArrayList<>());
-         }
+        System.out.println("close " + side2 +"of the part"+ part2);
+
+        if(part2.isAllSidesConnected()) city2.getOpenParts().remove(part2);
+/*
+        for(Side side : side1.getConnections()){
+            if (side.getOppositeSide()!=null && !side.isConnected()){
+                part1.closeSide(side1);
+                System.out.println("Why"+side+"has opposite but not connected");
+                if(part1.isAllSidesConnected()) this.getOpenParts().remove(part1);
+                side.getOppositeSide().getInfrastructurePart().closeSide(side.getOppositeSide());
+                if( side.getOppositeSide().getInfrastructurePart().isAllSidesConnected()){
+                    side.getOppositeSide().getInfrastructure().getOpenParts().remove(part1);
+                }
+            }
+        } */// TODO why has i made this
+
+
+        sides.addAll(city2.getSides());
+        openParts.addAll(city2.getOpenParts());
+        System.out.println(openParts);
+
+
+
+
+
+
+    for(Playerp playerInCity2 : city2.getSidesWithMiples().keySet()){
+        if(!sidesWithMiples.containsKey(playerInCity2)){
+            sidesWithMiples.put(playerInCity2,new ArrayList<>());
+            playerInCity2.removeInfrastructure(city2);
+            playerInCity2.addInfrastructure(this);
+        }
          sidesWithMiples.get(playerInCity2).addAll(city2.getSidesWithMiples().get(playerInCity2));
-     }
+    }
+    score+=city2.getScor();
+    for(InfrastructurePart part: city2.getSides()){
+        part.sidesAddToInfrastructure(this);
+        part.getSides().get(0).getFieldPoint().removeInfrastructure(city2);
+        part.getSides().get(0).getFieldPoint().addInfrastructure(this);
+    }
+    if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
+            this.finishInfrastructure();
+    }
     }
     public City(ArrayList<InfrastructurePart> parts, ArrayList<InfrastructurePart> openPartss, ArrayList<Playerp> playerss){
 
@@ -178,10 +212,11 @@ public class City extends  Infrastructure {
                     maxMiple = sides.size();
                 }
             }
+            if(sidesWithMiples.isEmpty()) System.out.println("City have not player");
             for (Playerp playerp : sidesWithMiples.keySet()) {
                 if (sidesWithMiples.get(playerp).size() == maxMiple) {
                     playerp.addPointsInfrastructure(score);
-                   System.out.println( playerp.getScore());
+                   System.out.println( playerp+ " "+playerp.getScore());
                     playerp.removeInfrastructure(this);
                     for(Side side:sidesWithMiples.get(playerp) ){
                         playerp.addMiple(side.getMiple());

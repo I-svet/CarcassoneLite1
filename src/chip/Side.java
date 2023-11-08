@@ -58,24 +58,60 @@ public class Side {
 
 
 
-    public void setOppositeSide(Side oppositeSide) {
+    public synchronized void setOppositeSide(Side oppositeSide) {
 
         this.oppositeSide = oppositeSide;
         oppositeSide.setOnlyOppositeSide(this);
 
-        if(oppositeSide.getInfrastructure()!=null && this.getInfrastructure() ==null)
-        {
-            oppositeSide.getInfrastructure().addOnePart(oppositeSide,this);
-            InfrastructurePart part1 = oppositeSide.getInfrastructurePart();
-             part1.closeSide(oppositeSide);
+        if(oppositeSide.getInfrastructure()!=null) {
 
-            if(part1.isAllSidesConnected()) this.getInfrastructure().getOpenParts().remove(part1);
-            System.out.println("close " + oppositeSide );
+            if (this.getInfrastructure() == null) {
+                oppositeSide.getInfrastructure().addOnePart(oppositeSide, this);
+                InfrastructurePart part1 = oppositeSide.getInfrastructurePart();
+                part1.closeSide(oppositeSide);
+
+                if (part1.isAllSidesConnected()) this.getInfrastructure().getOpenParts().remove(part1);
+                System.out.println("close " + oppositeSide);
+
+                this.getInfrastructure().addParts(this);
+                if (oppositeSide.getInfrastructure().isFinished()) {
+                    oppositeSide.getInfrastructure().finishInfrastructure();
+                }
+            }
+            else {  
+                if (this.getInfrastructure()!=oppositeSide.getInfrastructure()) {
+                    this.getInfrastructure().connectInfrastructure(this, oppositeSide.getInfrastructure(), oppositeSide);
+                }
+                else{
+                    InfrastructurePart part1 = oppositeSide.getInfrastructurePart();
+                    part1.closeSide(oppositeSide);
+                    System.out.println("close " + oppositeSide);
+                    InfrastructurePart part2 = this.getInfrastructurePart();
+                    part2.closeSide(this);
+                    System.out.println("close " + this);
+
+                    if (part1.isAllSidesConnected()) this.getInfrastructure().getOpenParts().remove(part1);
+
+                    if (part2.isAllSidesConnected()) this.getInfrastructure().getOpenParts().remove(part2);
+                }
+                if (this.getInfrastructure().isFinished()) {
+                    this.getInfrastructure().finishInfrastructure();
+                }
+            }
+        }else{ if(this.getInfrastructure()!=null) {
+            this.getInfrastructure().addOnePart(this, oppositeSide);
+            InfrastructurePart part1 = this.getInfrastructurePart();
+            part1.closeSide(this);
+            System.out.println("close " + this);
+            if (part1.isAllSidesConnected()) this.getInfrastructure().getOpenParts().remove(part1);
+
 
             this.getInfrastructure().addParts(this);
-            if(oppositeSide.getInfrastructure().isFinished()){
-                oppositeSide.getInfrastructure().finishInfrastructure();
+            if (this.getInfrastructure().isFinished()) {
+                this.getInfrastructure().finishInfrastructure();
             }
+        }
+
         }
     }
     public void setOnlyOppositeSide(Side oppositeSide) {

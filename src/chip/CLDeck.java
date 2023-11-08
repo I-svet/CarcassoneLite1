@@ -15,13 +15,40 @@ public class CLDeck {
     {
         cardsInDeck=0;
 
-
-        cards[cardsInDeck++]= new CLCard().city3();
-        cards[cardsInDeck++]= new CLCard().city3();
-
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
         cards[cardsInDeck++]= new CLCard().city1();
         cards[cardsInDeck++]= new CLCard().city1();
+
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().CityCornerCHF();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city2();
+        cards[cardsInDeck++]= new CLCard().city1();
+        cards[cardsInDeck++]= new CLCard().city1();
+
+
 /*
+        cards[cardsInDeck++]= new CLCard().city3();
+        cards[cardsInDeck++]= new CLCard().city3();
+
+        cards[cardsInDeck++]= new CLCard().city1();
+        cards[cardsInDeck++]= new CLCard().city1();
+
         cards[cardsInDeck++]= new CLCard().city5();
         cards[cardsInDeck++]= new CLCard().city5();
         cards[cardsInDeck++]= new CLCard().city5();
@@ -35,7 +62,7 @@ public class CLDeck {
         cards[cardsInDeck++]= new CLCard().city3();
         cards[cardsInDeck++]= new CLCard().RoadCity3();
         cards[cardsInDeck++]= new CLCard().RoadCity3();
-*/
+
 
         cards[cardsInDeck++]= new CLCard().city3();
         cards[cardsInDeck++]= new CLCard().city4();
@@ -72,6 +99,8 @@ public class CLDeck {
         cards[cardsInDeck++]= new CLCard().RoadCity3();
         cards[cardsInDeck++]= new CLCard().RoadCity4();
         cards[cardsInDeck++]= new CLCard().RoadCity4();
+
+ */
 
 
     }

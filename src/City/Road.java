@@ -173,7 +173,7 @@ public class Road extends Infrastructure{
             for (Playerp playerp : sidesWithMiples.keySet()) {
                 if (sidesWithMiples.get(playerp).size() == maxMiple) {
                     playerp.addPointsInfrastructure(score);
-                    System.out.println( playerp.getScore());
+                    System.out.println( playerp+ ""+playerp.getScore());
                     playerp.removeInfrastructure(this);
                     for(Side side:sidesWithMiples.get(playerp) ){
                         playerp.addMiple(side.getMiple());
@@ -194,6 +194,45 @@ public class Road extends Infrastructure{
 
         }
         else System.out.println("road is not finished");
+    }
+    public void connectInfrastructure( Side side1, Infrastructure city2,  Side side2){
+        InfrastructurePart part1= side1.getInfrastructurePart();
+        part1.closeSide(side1);
+        if(part1.isAllSidesConnected()) this.getOpenParts().remove(part1);
+
+
+
+        InfrastructurePart part2=side2.getInfrastructurePart();
+        part2.closeSide(side2);
+        if(part2.isAllSidesConnected()) city2.getOpenParts().remove(part1);
+
+
+
+        sides.addAll(city2.getSides());
+        openParts.addAll(city2.getOpenParts());
+
+
+
+
+        for(Playerp playerInCity2 : city2.getSidesWithMiples().keySet()){
+            if(!sidesWithMiples.containsKey(playerInCity2)){
+                sidesWithMiples.put(playerInCity2,new ArrayList<>());
+                playerInCity2.removeInfrastructure(city2);
+                playerInCity2.addInfrastructure(this);
+            }
+            sidesWithMiples.get(playerInCity2).addAll(city2.getSidesWithMiples().get(playerInCity2));
+        }
+
+        score+=city2.getScor();
+        for(InfrastructurePart part: city2.getSides()){
+            part.sidesAddToInfrastructure(this);
+
+            part.getSides().get(0).getFieldPoint().removeInfrastructure(city2);
+            part.getSides().get(0).getFieldPoint().addInfrastructure(this);
+        }
+        if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
+            this.finishInfrastructure();
+        }
     }
 
 

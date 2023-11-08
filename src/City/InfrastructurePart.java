@@ -31,6 +31,7 @@ public abstract class InfrastructurePart {
 
     public abstract void sidesAddToInfrastructure(Infrastructure infrastructure);
 
+
     public ArrayList<Side> getSides() {
         return sides;
     }

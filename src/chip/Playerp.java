@@ -56,7 +56,9 @@ public class Playerp {
         infrastructures.add(infrastructure);
     }
     public void addPointsInfrastructure(int score){
+
         this.score+=score;
+        System.out.println(this+" "+ score);
 
     }
     public void addMiple(ArrayList<SuperMiple> miples){

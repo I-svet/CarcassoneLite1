@@ -235,21 +235,21 @@ public class CLField {
         if (points[x - 1][y] != null) {
 
             points[x][y].getLeftSide().setOppositeSide(points[x - 1][y].getRightSide());
-            points[x-1][y].getRightSide().setOppositeSide(points[x][y].getLeftSide()); //TODO i should remade this
+          //  points[x-1][y].getRightSide().setOppositeSide(points[x][y].getLeftSide()); //TODO i should remade this
 
 
         }
         if (points[x + 1][y] != null) {
             points[x][y].getRightSide().setOppositeSide(points[x + 1][y].getLeftSide());
-            points[x+1][y].getLeftSide().setOppositeSide(points[x][y].getRightSide());
+          //  points[x+1][y].getLeftSide().setOppositeSide(points[x][y].getRightSide());
         }
         if (points[x][y-1] != null) {
             points[x][y].getUpSide().setOppositeSide(points[x][y-1].getDownSide());
-            points[x][y-1].getDownSide().setOppositeSide(points[x][y].getUpSide());
+            //points[x][y-1].getDownSide().setOppositeSide(points[x][y].getUpSide());
         }
         if (points[x][y+1] != null) {
             points[x][y].getDownSide().setOppositeSide(points[x][y+1].getUpSide());
-            points[x][y+1].getUpSide().setOppositeSide(points[x][y].getDownSide());
+            //points[x][y+1].getUpSide().setOppositeSide(points[x][y].getDownSide());
         }
 
         return points[x][y];

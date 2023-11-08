@@ -36,6 +36,7 @@ public abstract class Infrastructure {
         public HashMap<Playerp, ArrayList<Side>> getSidesWithMiples() {
             return sidesWithMiples;
         }
+    public abstract void connectInfrastructure( Side side1, Infrastructure city2,  Side side2);
 
 
 
