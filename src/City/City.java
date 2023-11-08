@@ -99,6 +99,7 @@ public class City extends  Infrastructure {
     public HashMap<Playerp, ArrayList<Side>> getSidesWithMiples() {
         return sidesWithMiples;
     }
+    //
 
     public void connectInfrastructure( Side side1, Infrastructure city2,  Side side2){
         InfrastructurePart part1= side1.getInfrastructurePart();
