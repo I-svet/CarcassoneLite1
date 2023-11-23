@@ -14,6 +14,19 @@ public class Center {
     }
     public CenterC center;
     public SuperMiple miple;
+    public CLFieldPoint clFieldPoint;
+
+    public SuperMiple getMiple() {
+        return miple;
+    }
+    public void removeMiple() {
+         miple=null;
+    }
+
+    public CLFieldPoint getClFieldPoint() {
+        return clFieldPoint;
+    }
+
     public Center(final CenterC center){
         this.center = center;
     }

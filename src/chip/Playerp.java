@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 public class Playerp {
     private ArrayList<Infrastructure> infrastructures ;
+    private ArrayList<Monaster> monasteries;
     private String name;
     private int score=0;
 
@@ -19,6 +20,7 @@ public class Playerp {
     public Playerp(String nameIds, String namecolor ){
         this.name=nameIds;
         infrastructures = new ArrayList<>();
+        monasteries = new ArrayList<>();
         setHand(namecolor);
 
     }
@@ -55,7 +57,14 @@ public class Playerp {
     public void addInfrastructure(Infrastructure infrastructure){
         infrastructures.add(infrastructure);
     }
+    public void addMonastery(Monaster monastery){ this.monasteries.add(monastery);}
     public void addPointsInfrastructure(int score){
+
+        this.score+=score;
+        System.out.println(this+" "+ score);
+
+    }
+    public void addPointsMonastery(int score){
 
         this.score+=score;
         System.out.println(this+" "+ score);
@@ -69,6 +78,14 @@ public class Playerp {
     }
     public void removeInfrastructure(Infrastructure infrastructure){
         infrastructures.remove(infrastructure);
+    }
+
+    public ArrayList<Monaster> getMonasteries() {
+        return monasteries;
+    }
+
+    public void removeMonastery(Monaster monastery){
+        monasteries.remove(monastery);
     }
     public int getScore()
     {

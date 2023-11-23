@@ -2,17 +2,16 @@ package chip;
 
 
 import City.*;
-import City.CityPart;
 import chipMiple.SuperMiple;
 import main.GamePanel;
+import City.Monaster;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import static chip.CLFieldPoint.Orientation.A;
+import static chip.CLCard.Type.Monastery;
 
 public class CLField {
     private final CLFieldPoint[][] points;
@@ -231,6 +230,11 @@ public class CLField {
     }
     public CLFieldPoint getClFieldPoint(int x,int y){return points[x][y];}
     public CLFieldPoint addCard(int x, int y, CLCard card, int orientation){
+        for (Playerp playerp: gp.getGame().players){
+            for(Monaster monasteries: playerp.getMonasteries()){
+                monasteries.addParts(this);
+            }
+        }
         points[x][y] = new CLFieldPoint(card, orientation);
         if (points[x - 1][y] != null) {
 
@@ -330,9 +334,13 @@ public class CLField {
                        }
                    }
                    else{
-if(points[x][y].card.getCenter() !=null){
-    points[x][y].card.getCenter().miple=miple;
-}
+                        if(points[x][y].card.getCenter() !=null){
+                            points[x][y].card.getCenter().miple=miple;
+                            Monaster newMonestery =new Monaster(points[x][y].card.getCenter(),player,x,y);
+                            player.addMonastery(newMonestery);
+                            newMonestery.addParts(this);
+
+                        }
                    }
                }
            }

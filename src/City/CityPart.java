@@ -6,10 +6,7 @@ import chip.Side;
 import java.util.ArrayList;
 
 public class CityPart extends InfrastructurePart {
-//ArrayList<Side> sides;
-//ArrayList<Side> opensiddes;
-//Set<Side> set =  new ConcurrentSkipListSet<>();
-//Queue<Side> list = new ConcurrentLinkedQueue<>();
+
 
     public ArrayList<Side> getOpensides() {
         return opensiddes;
@@ -32,7 +29,7 @@ public class CityPart extends InfrastructurePart {
     public void sidesAddToInfrastructure(Infrastructure infrastructure){
         for(Side side : sides ) {
         side.setInfrastructure(infrastructure);
-            System.out.println("setCity"+ "to the"+ side);
+            System.out.println("setCity"+ "to the "+ side);
         }
     }
 

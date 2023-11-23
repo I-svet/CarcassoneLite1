@@ -33,6 +33,7 @@ public class CLFieldPoint {
      Side leftSide;
      Side rightSide;
     ArrayList<Infrastructure> infrastructure;
+    Monaster monastery;
      Orientation ont;
 
 
@@ -42,6 +43,9 @@ public class CLFieldPoint {
     int orientation;
     public void removeInfrastructure(Infrastructure infrastructure){
     this.infrastructure.remove(infrastructure);
+    }
+    public void removeMonastery(){
+        this.monastery=null;
     }
     public void setInfrastructure(ArrayList<Infrastructure> infrastructure) {
         this.infrastructure = infrastructure;
@@ -103,6 +107,7 @@ public class CLFieldPoint {
     public CLFieldPoint(CLCard card, Integer orientation){
         this.ont = Orientation.getOrientation(orientation);
         this.card=card;
+        if(card.getCenter() != null) card.getCenter().clFieldPoint=this;
         this.orientation = orientation;
         ArrayList<Side> sides = new ArrayList<>(List.of(card.getA(), card.getD(), card.getC(),card.getB() ));
         upSide = sides.get(orientation);
@@ -120,5 +125,6 @@ public class CLFieldPoint {
     public int getOrientation(){
         return this.orientation;
     }
+    public void addMonastery(Monaster monastery){this.monastery = monastery;}
 
 }

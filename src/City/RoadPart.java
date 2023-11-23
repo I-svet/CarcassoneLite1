@@ -10,9 +10,6 @@ public class RoadPart extends InfrastructurePart {
         return opensiddes;
     }
 
-
-
-
     public RoadPart(Side side, ArrayList<Side> sides)
     {
         //side.setCityPart(this); // TODO why i cannot delete this
@@ -21,7 +18,7 @@ public class RoadPart extends InfrastructurePart {
         opensiddes = new ArrayList<>(this.sides);
         for(Side sidde: sides){
             sidde.setInfrastructurePart(this);
-            // System.out.println("setCityPart " +this+ " to the "+ sidde);
+            System.out.println("setCityPart " +this+ " to the "+ sidde);
         }
         if(sides.isEmpty()) System.out.println("shit sides is empty");
 
@@ -30,7 +27,7 @@ public class RoadPart extends InfrastructurePart {
     public void sidesAddToInfrastructure(Infrastructure infrastructure){
         for(Side side : sides ) {
             side.setInfrastructure(infrastructure);
-            System.out.println("setRoad"+ "to the"+ side);
+            System.out.println("setRoad"+ "to the "+ side);
         }
     }
 

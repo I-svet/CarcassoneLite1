@@ -91,6 +91,59 @@ public class Road extends Infrastructure{
     public HashMap<Playerp, ArrayList<Side>> getSidesWithMiples() {
         return sidesWithMiples;
     }
+    public void connectInfrastructure( Side side1, Infrastructure city2,  Side side2){
+        InfrastructurePart part1= side1.getInfrastructurePart();
+        part1.closeSide(side1);
+        System.out.println("close " + side1 +"of the part"+ part1);
+
+        if(part1.isAllSidesConnected()) this.getOpenParts().remove(part1);
+
+        InfrastructurePart part2=side2.getInfrastructurePart();
+        part2.closeSide(side2);
+        System.out.println("close " + side2 +"of the part"+ part2);
+
+        if(part2.isAllSidesConnected()) city2.getOpenParts().remove(part2);
+/*
+        for(Side side : side1.getConnections()){
+            if (side.getOppositeSide()!=null && !side.isConnected()){
+                part1.closeSide(side1);
+                System.out.println("Why"+side+"has opposite but not connected");
+                if(part1.isAllSidesConnected()) this.getOpenParts().remove(part1);
+                side.getOppositeSide().getInfrastructurePart().closeSide(side.getOppositeSide());
+                if( side.getOppositeSide().getInfrastructurePart().isAllSidesConnected()){
+                    side.getOppositeSide().getInfrastructure().getOpenParts().remove(part1);
+                }
+            }
+        } */// TODO why has i made this
+
+
+        sides.addAll(city2.getSides());
+        openParts.addAll(city2.getOpenParts());
+        System.out.println(openParts);
+
+
+
+
+
+
+        for(Playerp playerInCity2 : city2.getSidesWithMiples().keySet()){
+            if(!sidesWithMiples.containsKey(playerInCity2)){
+                sidesWithMiples.put(playerInCity2,new ArrayList<>());
+                playerInCity2.removeInfrastructure(city2);
+                playerInCity2.addInfrastructure(this);
+            }
+            sidesWithMiples.get(playerInCity2).addAll(city2.getSidesWithMiples().get(playerInCity2));
+        }
+        score+=city2.getScor();
+        for(InfrastructurePart part: city2.getSides()){
+            part.sidesAddToInfrastructure(this);
+            part.getSides().get(0).getFieldPoint().removeInfrastructure(city2);
+            part.getSides().get(0).getFieldPoint().addInfrastructure(this);
+        }
+        if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
+            this.finishInfrastructure();
+        }
+    }
 
     public Road(Road city1, Side side1, Road city2,  Side side2){
         InfrastructurePart part1= side1.getInfrastructurePart();
@@ -195,45 +248,7 @@ public class Road extends Infrastructure{
         }
         else System.out.println("road is not finished");
     }
-    public void connectInfrastructure( Side side1, Infrastructure city2,  Side side2){
-        InfrastructurePart part1= side1.getInfrastructurePart();
-        part1.closeSide(side1);
-        if(part1.isAllSidesConnected()) this.getOpenParts().remove(part1);
 
-
-
-        InfrastructurePart part2=side2.getInfrastructurePart();
-        part2.closeSide(side2);
-        if(part2.isAllSidesConnected()) city2.getOpenParts().remove(part1);
-
-
-
-        sides.addAll(city2.getSides());
-        openParts.addAll(city2.getOpenParts());
-
-
-
-
-        for(Playerp playerInCity2 : city2.getSidesWithMiples().keySet()){
-            if(!sidesWithMiples.containsKey(playerInCity2)){
-                sidesWithMiples.put(playerInCity2,new ArrayList<>());
-                playerInCity2.removeInfrastructure(city2);
-                playerInCity2.addInfrastructure(this);
-            }
-            sidesWithMiples.get(playerInCity2).addAll(city2.getSidesWithMiples().get(playerInCity2));
-        }
-
-        score+=city2.getScor();
-        for(InfrastructurePart part: city2.getSides()){
-            part.sidesAddToInfrastructure(this);
-
-            part.getSides().get(0).getFieldPoint().removeInfrastructure(city2);
-            part.getSides().get(0).getFieldPoint().addInfrastructure(this);
-        }
-        if(this.isFinished()&& !this.getSidesWithMiples().isEmpty()){
-            this.finishInfrastructure();
-        }
-    }
 
 
 
