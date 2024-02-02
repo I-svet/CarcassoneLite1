@@ -95,6 +95,7 @@ public class CLDeck {
         cards[cardsInDeck++]= new CLCard().city2();
         cards[cardsInDeck++]= new CLCard().Monastery();
         cards[cardsInDeck++]= new CLCard().Monastery();
+        /*
         cards[cardsInDeck++]= new CLCard().Road1();
         cards[cardsInDeck++]= new CLCard().Road1();
         cards[cardsInDeck++]= new CLCard().Road2();
@@ -113,6 +114,8 @@ public class CLDeck {
         cards[cardsInDeck++]= new CLCard().RoadCity3();
         cards[cardsInDeck++]= new CLCard().RoadCity4();
         cards[cardsInDeck++]= new CLCard().RoadCity4();
+
+ */
 
 
 

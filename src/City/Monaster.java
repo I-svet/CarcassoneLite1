@@ -16,25 +16,27 @@ public class Monaster{
     int parts[][]= new int[3][3];
 
     int score =0;
-    public Monaster (Center center, Playerp playerp,int x, int y){
-        this.x=x;
-        this.y=y;
-        this.center= center;
-        point=center.clFieldPoint;
-        pointOfOnePart=1;
+    public Monaster(Center center, Playerp playerp,int x, int y){
+
+        this.x = x;
+        this.y = y;
+        this.center = center;
+        point = center.clFieldPoint;
+        pointOfOnePart = 1;
         this.playerp = playerp;
         score += pointOfOnePart;
         center.getClFieldPoint().addMonastery(this);
-        parts[1][1]=1;
+        parts[1][1] = 1;
 
         System.out.print(Arrays.stream(parts).count());
 
     }
+    public boolean isFinished(){return finished;}
     public void addParts(CLField field){
         finished=true;
         for(int i=x-1; i<=x+1;i++){
             for(int j=y-1; j<=y+1;j++){
-                if (field.getClFieldPoint(i,j)!=null){
+                if (field.getClFieldPoint(i,j) != null){
                     if (parts[x+1-i][y+1-j] == 0){
                             parts[x + 1 - i][y + 1 - j] = 1;
                             score += 1;
@@ -42,6 +44,9 @@ public class Monaster{
                 }
                 else finished=false;
             }
+        }
+        if (finished){
+            finishMonastery();
         }
 
     }

@@ -1,5 +1,6 @@
 package main;
 
+import City.Monaster;
 import chip.*;
 
 import chipCard.SuperChip;
@@ -46,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 
      CLDeck clDeck = new CLDeck();
      CLCard upCard=new CLCard();
+     ArrayList<Monaster> monasteries = new ArrayList<>();
      Game game;
      boolean putcard=false;
     ArrayList<String> temp;
@@ -89,6 +91,13 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame(GamePanel gp, AssetSetter aSetter){
         aSetter.setObject(gp);
     }
+    public void addMonastery(Monaster monaster){
+        monasteries.add(monaster);
+    }
+    public void removeMonastery(Monaster monaster){
+        monasteries.remove(monaster);
+    }
+    public ArrayList<Monaster> getMonasteries(){return monasteries;}
 
 
     public void paintComponent(Graphics g){

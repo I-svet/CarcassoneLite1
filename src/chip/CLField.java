@@ -230,11 +230,8 @@ public class CLField {
     }
     public CLFieldPoint getClFieldPoint(int x,int y){return points[x][y];}
     public CLFieldPoint addCard(int x, int y, CLCard card, int orientation){
-        for (Playerp playerp: gp.getGame().players){
-            for(Monaster monasteries: playerp.getMonasteries()){
-                monasteries.addParts(this);
-            }
-        }
+
+
         points[x][y] = new CLFieldPoint(card, orientation);
         if (points[x - 1][y] != null) {
 
@@ -254,6 +251,12 @@ public class CLField {
         if (points[x][y+1] != null) {
             points[x][y].getDownSide().setOppositeSide(points[x][y+1].getUpSide());
             //points[x][y+1].getUpSide().setOppositeSide(points[x][y].getDownSide());
+        }
+
+        for(Monaster monastery: gp.getMonasteries()){
+            if (!monastery.isFinished()) {
+                monastery.addParts(this);
+            }
         }
 
         return points[x][y];
@@ -337,6 +340,7 @@ public class CLField {
                         if(points[x][y].card.getCenter() !=null){
                             points[x][y].card.getCenter().miple=miple;
                             Monaster newMonestery =new Monaster(points[x][y].card.getCenter(),player,x,y);
+                            gp.addMonastery(newMonestery);
                             player.addMonastery(newMonestery);
                             newMonestery.addParts(this);
 
