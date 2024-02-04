@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 public class GamePanel extends JPanel implements Runnable{
     JLabel jLabel1;
+    JLabel jLabel2;
     public final int originalTileSize = 216;
     final int originalMipleSize = 16;
     final int scale=1;
@@ -57,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
     public HashMap<String, BufferedImage> images = new HashMap<>();
 
 
-    public GamePanel(ArrayList<String> playerIds,JLabel jLabel1){
+    public GamePanel(ArrayList<String> playerIds,JLabel jLabel1, JLabel jLabel2){
         super(true);
         upCard.city1();
         clDeck.reset();
@@ -65,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable{
         upCard=clDeck.drawCard();
 
         this.jLabel1=jLabel1;
+        this.jLabel2=jLabel2;
         temp=playerIds;
         pids=temp.toArray(new String[temp.size()]);
         game=new Game(pids);
@@ -80,10 +82,14 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public void setPidName(Game game) {
         String currentPlayer=game.getCurrentPlayer();
+        int score = game.players[game.getCurrentPlayerIndex()].getScore();
         jLabel1.setText(currentPlayer+"'s turn");
+        jLabel2.setText(currentPlayer+"'s score = "+score);
     }
-    public void setPidName(String currentPlayer){
+    public void setPidName(String currentPlayer, Game game){
         jLabel1.setText(currentPlayer+"'s turn");
+        int score = game.players[game.getCurrentPlayerIndex()].getScore();
+        jLabel2.setText(currentPlayer+"'s score = "+score);
     }
     public void setUpCard(CLCard upCard,CLDeck clDeck){
         upCard=clDeck.drawCard();
@@ -206,7 +212,7 @@ public class GamePanel extends JPanel implements Runnable{
             if ((keyH.skip)&&(putcard)) {
                 keyH.skip = false;
                 putcard=false;
-                setPidName(game.changePlayer());
+                setPidName(game.changePlayer(),game);
                 upCard = clDeck.drawCard();
                 mH.p = false;
             } else if ((!mH.check2) && (mH.p)) {
@@ -221,7 +227,7 @@ public class GamePanel extends JPanel implements Runnable{
                         clField.addMiple(xOnMapCard, yOnMapCard, game.players[game.getCurrentPlayerIndex()].getHand().get(0), xOnMapPoint, yOnMapPoint, this,game.players[game.getCurrentPlayerIndex()]);
 
                         game.players[game.getCurrentPlayerIndex()].getHand().remove(0);
-                        setPidName(game.changePlayer());
+                        setPidName(game.changePlayer(),game);
                         upCard = clDeck.drawCard();
                         mH.p = false;
                         putcard=false;

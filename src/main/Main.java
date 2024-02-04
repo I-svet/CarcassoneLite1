@@ -27,9 +27,10 @@ public class Main extends JFrame {
 
       //  this.playerIds=playerIds;
         jLabel1=new JLabel();
+        jLabel2 = new JLabel();
 
 
-        gamePanel = new GamePanel(playerIds, jLabel1);
+        gamePanel = new GamePanel(playerIds, jLabel1, jLabel2 );
          deckPanel = new DeckPanel(gamePanel);
         miplePanel = new MiplePanel(gamePanel);
         AssetSetter aSetter = new AssetSetter(gamePanel);
@@ -69,6 +70,10 @@ miplePanel.setBackground(Color.BLACK);
         jLabel1.setFont(new java.awt.Font("PMingLiU-ExtB", 2, 18)); // NOI18N
        // jLabel1.setText("smthturn");
         jLabel1.setToolTipText("");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setFont(new java.awt.Font("PMingLiU-ExtB", 2, 18)); // NOI18N
+        //jLabel2.setText("jLabel2");
+        jLabel2.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(deckPanel);
         deckPanel.setLayout(jPanel2Layout);
@@ -92,6 +97,7 @@ miplePanel.setBackground(Color.BLACK);
                         .addGap(0, gamePanel.mipleSize*2, Short.MAX_VALUE)
         );
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,7 +109,9 @@ miplePanel.setBackground(Color.BLACK);
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(deckPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(miplePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(miplePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                )
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))//
         );
         layout.setVerticalGroup(
@@ -114,8 +122,10 @@ miplePanel.setBackground(Color.BLACK);
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(miplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
 
-                        .addGap(0, gamePanel.screenHeight-gamePanel.originalTileSize-25-gamePanel.mipleSize*2, Short.MAX_VALUE)
+                        .addGap(0, gamePanel.screenHeight-gamePanel.originalTileSize-70-gamePanel.mipleSize*2, Short.MAX_VALUE)
                         )
 
                         .addGroup(layout.createSequentialGroup()
@@ -128,6 +138,7 @@ miplePanel.setBackground(Color.BLACK);
      DeckPanel deckPanel ;
     GamePanel gamePanel;
     JLabel jLabel1;
+    JLabel jLabel2;
     MiplePanel miplePanel;
 }
 /*JFrame window = new JFrame();
